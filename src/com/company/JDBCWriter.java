@@ -44,6 +44,7 @@ public class JDBCWriter {
     }
 
     //vi sender et player objekt til metoden, og den indsætter den.
+    /* mangler at rettes til så det passer med child
     public int insertPlayer(Child Child){
 
         String insStr = "INSERT INTO childs(first_name,last_name,age,team) VALUES ('" +
@@ -68,8 +69,10 @@ public class JDBCWriter {
         System.out.println("Successfully inserted a player");
         return result;
     }
+   */
 
-    public Child getChildFromDbById(int child_id){
+  /*
+  public Child getChildFromDbById(int child_id){
 
         String selectStr = "SELECT * FROM childs where child_id = ?";
         PreparedStatement preparedStatement;
@@ -95,7 +98,6 @@ public class JDBCWriter {
 
                 // LAV MIG player.setPlayer_ID(playerid);
             }
-
         } catch (SQLException e){
             e.printStackTrace();
             System.out.println("Fejl i getPlayerFromDbById");
@@ -103,6 +105,8 @@ public class JDBCWriter {
 
         return child;
     }
+
+   */
 
     public int deleteChild(int childid){
         String delQuery = "DELETE from childs where childid = ?";
