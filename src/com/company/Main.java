@@ -9,8 +9,8 @@ public class Main {
         Child child = new Child();
 
         //Method Calls
-        child.createChild().toString();
-        parent.createParent().toString();
+        System.out.println(child.createChild().toString());
+        System.out.println(parent.createParent().toString());
     }
 
 
