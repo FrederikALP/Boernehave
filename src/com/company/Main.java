@@ -4,8 +4,7 @@ public class Main {
 UserInput userInput = new UserInput();
     public static void main(String[] args) {
 	// write your code here
-        Parent parent;
-        parent = createParent();
-        System.out.println(player.toString());
+        Parent parent = new Parent();
+        System.out.println(parent.createParent().toString());
     }
 }
