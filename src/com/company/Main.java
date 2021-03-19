@@ -1,12 +1,23 @@
 package com.company;
 
 public class Main {
-UserInput userInput = new UserInput();
-    public static void main(String[] args) {
 
-	// write your code here
+
+    void run() {
+        //Instances
         Parent parent = new Parent();
+        Child child = new Child();
 
-        System.out.println(parent.createParent().toString());
+        //Method Calls
+        child.createChild().toString();
+        parent.createParent().toString();
+    }
+
+
+    public static void main(String[] args) {
+        new Main().run();
+
+
+
     }
 }
