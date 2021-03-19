@@ -25,7 +25,7 @@ public class JDBCWriter {
 
     public int deleteMember(int id){
 
-        String delStr = "DELETE FROM players WHERE child_id = ?";
+        String delStr = "DELETE FROM childs WHERE child_id = ?";
         PreparedStatement preparedStatement;
         int result = -1;
 
@@ -69,29 +69,29 @@ public class JDBCWriter {
         return result;
     }
 
-    public Player getPlayerFromDbById(int player_id){
+    public Child getChildFromDbById(int child_id){
 
-        String selectStr = "SELECT * FROM players where player_id = ?";
+        String selectStr = "SELECT * FROM childs where child_id = ?";
         PreparedStatement preparedStatement;
-        Player player = new Player();
+        Child child = new Child();
 
         try {
             preparedStatement = connection.prepareStatement(selectStr);
-            preparedStatement.setInt(1,player_id);
+            preparedStatement.setInt(1,child_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             //vi bruger executeQuery
 
             while (resultSet.next()){
-                int playerid =resultSet.getInt("player_id");
+                int childid =resultSet.getInt("player_id");
                 String first_name = resultSet.getString("first_name");
                 String last_name = resultSet.getString("last_name");
                 int age = resultSet.getInt("age");
                 int team = resultSet.getInt("team");
 
-                player.setFirstname(first_name);
-                player.setLastname(last_name);
-                player.setAge(age);
-                player.setTeam(team);
+                child.setFirstname(first_name);
+                child.setLastname(last_name);
+                child.setAge(age);
+                child.setTeam(team);
 
                 // LAV MIG player.setPlayer_ID(playerid);
             }
@@ -101,61 +101,21 @@ public class JDBCWriter {
             System.out.println("Fejl i getPlayerFromDbById");
         }
 
-        return player;
+        return child;
     }
 
-    // FIX DEN HER LALALALA
-    public LinkedList returnAllPlayers(){
-        //void skal ændres til LISTTYPE
-        //LAV LINKED LIST OG RETURN DEN!
-        LinkedList linkedList = new LinkedList();
-        PreparedStatement preparedStatement;
-        String selectStr = "SELECT * FROM players";
-
-        try{
-
-            preparedStatement = connection.prepareStatement(selectStr);
-            ResultSet resultSet =preparedStatement.executeQuery();
-            while (resultSet.next()){
-                Player player = new Player();
-                int playerid =resultSet.getInt("playerid");
-                String first_name = resultSet.getString("firstname");
-                String last_name = resultSet.getString("lastname");
-                int age = resultSet.getInt("age");
-                int team = resultSet.getInt("team");
-
-                player.setFirstname(first_name);
-                player.setLastname(last_name);
-                player.setAge(age);
-                player.setTeam(team);
-                player.setPlayerid(playerid);
-                linkedList.insertAtEnd(player);
-            }
-
-
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return linkedList;
-    }
-    public int deletePlayer(int playerid){
-        String delQuery = "DELETE from players where playerid = ?";
+    public int deleteChild(int childid){
+        String delQuery = "DELETE from childs where childid = ?";
         PreparedStatement preparedStatement;
         int result = -1;
 
         try {
             preparedStatement = connection.prepareStatement(delQuery);
-            preparedStatement.setInt(1,playerid);
+            preparedStatement.setInt(1,childid);
             result = preparedStatement.executeUpdate();
         } catch(SQLException err) {
             err.printStackTrace();
         }
         return result;
     }
-
-
-    public int updatePlayer(int player_id, Player player){
-
-        return 1;}
-
 }
