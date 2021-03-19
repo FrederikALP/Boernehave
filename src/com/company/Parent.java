@@ -6,6 +6,7 @@ public class Parent extends Child {
     UserInput userInput = new UserInput();
 
     //Attributes
+    private int idparent;
     private String firstName;
     private String lastName;
     private String address;
@@ -27,6 +28,8 @@ public class Parent extends Child {
     }
 
     //Getters & Setters
+
+
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName; }

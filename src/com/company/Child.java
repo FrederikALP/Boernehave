@@ -6,20 +6,31 @@ public class Child {
     UserInput userInput = new UserInput();
 
     //Attributes
+    private int idChild;
     private String firstNameChild;
     private String lastNameChild;
     private int ageChild;
+    private int siblingNr;
+    private boolean onWaitList;
 
     //Constructors
     Child() {}
 
-    Child(String firstNameChild, String lastNamechild, int ageChild){
+    Child(int idChild, String firstNameChild, String lastNamechild, int ageChild, int siblingNr, boolean onWaitlist){
+        this.idChild = idChild;
         this.firstNameChild = firstNameChild;
         this.lastNameChild = lastNamechild;
         this.ageChild = ageChild;
+        this.siblingNr = siblingNr;
+        this.onWaitList = onWaitlist;
     }
 
     //Getters & Setters
+    public int getIdChild() {return idChild;}
+
+    public void setIdChild(int idChild) {this.idChild = idChild;}
+
+
     public String getFirstNameChild() {return firstNameChild;}
 
     public void setFirstNameChild(String newFirstNameChild) {this.lastNameChild = newFirstNameChild;}
@@ -33,6 +44,16 @@ public class Child {
     public int getAgeChild() {return ageChild;}
 
     public void setAgeChild(int newAgeChild) {this.ageChild = newAgeChild;}
+
+
+    public int getSiblingNr() {return siblingNr;}
+
+    public void setSiblingNr(int newSiblingNr) { this.siblingNr = newSiblingNr;}
+
+
+    public boolean getOnWaitList() {return onWaitList;}
+
+    public void setOnWaitList(boolean newOnWaitList) { this.onWaitList = newOnWaitList;}
 
 
     public Child createChild() {
