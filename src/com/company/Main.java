@@ -6,6 +6,6 @@ UserInput userInput = new UserInput();
 	// write your code here
         Parent parent;
         parent = createParent();
-        System.out.println(player.toString());
+        System.out.println(parent.toString());
     }
 }
