@@ -9,7 +9,7 @@ public class Main {
         Child child = new Child();
 
         //Method Calls
-        System.out.println(child.createChild().toString());
+        System.out.println(child.createChild(true).toString());
         System.out.println(parent.createParent().toString());
     }
 

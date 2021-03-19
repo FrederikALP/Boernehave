@@ -10,19 +10,19 @@ public class Child {
     private String firstNameChild;
     private String lastNameChild;
     private int ageChild;
-    private int siblingNr;
     private boolean onWaitList;
+    private int idParent;
 
     //Constructors
     Child() {}
 
-    Child(int idChild, String firstNameChild, String lastNamechild, int ageChild, int siblingNr, boolean onWaitlist){
+    Child(int idChild, String firstNameChild, String lastNamechild, int ageChild, boolean onWaitlist, int idParent){
         this.idChild = idChild;
         this.firstNameChild = firstNameChild;
         this.lastNameChild = lastNamechild;
         this.ageChild = ageChild;
-        this.siblingNr = siblingNr;
         this.onWaitList = onWaitlist;
+        this.idParent = idParent;
     }
 
     //Getters & Setters
@@ -46,21 +46,23 @@ public class Child {
     public void setAgeChild(int newAgeChild) {this.ageChild = newAgeChild;}
 
 
-    public int getSiblingNr() {return siblingNr;}
-
-    public void setSiblingNr(int newSiblingNr) { this.siblingNr = newSiblingNr;}
-
-
     public boolean getOnWaitList() {return onWaitList;}
 
     public void setOnWaitList(boolean newOnWaitList) { this.onWaitList = newOnWaitList;}
 
 
-    public Child createChild() {
+    public int getIdParent() {return idParent;}
+
+    public void setIdParent(int idParent) {this.idParent = idParent;}
+
+
+    public Child createChild(boolean childOnWaitList) {
+        int childid = getIdChild();
         String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
         String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
         int age = userInput.inputInt("Indtast barnets alder: ");
-        return new Child(firstName, lastName, age);
+        int parentid = getIdParent();
+        return new Child(childid, firstName, lastName, age, childOnWaitList, parentid);
     }
 
     @Override
