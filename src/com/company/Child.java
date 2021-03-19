@@ -36,14 +36,14 @@ public class Child {
 
 
     public Child createChild() {
-        String firstName = userInput.inputString("Input first name", true);
-        String lastName = userInput.inputString("Input last name", true);
-        int age = userInput.inputInt("Input phonenumber");
+        String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
+        String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
+        int age = userInput.inputInt("Indtast barnets alder: ");
         return new Child(firstName, lastName, age);
     }
 
     @Override
     public String toString() {
-        return "Child{" + "firstNameChild='" + firstNameChild + '\'' + ", lastNameChild='" + lastNameChild + '\'' + ", ageChild=" + ageChild + '}';
+        return "Barnets navn: " + firstNameChild + " " + lastNameChild + ", Alder: " + ageChild;
     }
 }

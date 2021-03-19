@@ -11,15 +11,17 @@ public class Parent extends Child {
     private String address;
     private int phoneNumber;
     private int zipcode;
+    private String city;
 
     //Constructors
     Parent() {}
 
-    Parent(String firstName, String lastName, String address, int zipcode, int phoneNumber) {
+    Parent(String firstName, String lastName, String address, int zipcode, String city, int phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.zipcode = zipcode;
+        this.city = city;
         this.phoneNumber = phoneNumber;
 
     }
@@ -39,31 +41,37 @@ public class Parent extends Child {
 
     public void setAddress(String address) {this.address = address;}
 
+
+    public int getZipcode() {return zipcode;}
+
+    public void setZipcode(int zipcode) {this.zipcode = zipcode;}
+
+
+    public String getCity() {return city;}
+
+    public void setCity(String city) {this.city = city;}
+
+
     public int getPhoneNumber() {return phoneNumber;}
 
     public void setPhoneNumber(int phoneNumber) {this.phoneNumber = phoneNumber;}
 
-    public int getZipcode() {
-        return zipcode;
-    }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
-    }
 
     //Method for creating Parent Object.
     public Parent createParent() {
-        String firstname = userInput.inputString("Skriv forældres fornavn", true);
-        String lastname = userInput.inputString("Skriv forældres efternavn", true);
-        String address = userInput.inputString("Skriv forældres adresse", false);
-        int zipcode = userInput.inputInt("Skriv forældres zipcode");
-        int phoneNumber = userInput.inputInt("Skriv forældres telefon nummer");
-        return new Parent(firstname, lastname, address, zipcode, phoneNumber);
+        String firstname = userInput.inputString("Indtast forældres fornavn: ", true);
+        String lastname = userInput.inputString("Indtast forældres efternavn: ", true);
+        String address = userInput.inputString("Indtast forældres vejnavn + nr.: ", false);
+        int zipcode = userInput.inputInt("Indtast postnummer: ");
+        String city = userInput.inputString("Indtast by: ", true);
+        int phoneNumber = userInput.inputInt("Indtast forældres telefon nummer: ");
+        return new Parent(firstname, lastname, address, zipcode, city, phoneNumber);
     }
 
 
     @Override
     public String toString() {
-        return "Player{" + "firstname='" + firstName + '\'' + ", lastname='" + lastName + '\'' + ", address=" + address + ", zipcode=" + zipcode + ", phone number=" + phoneNumber + '}';
+        return"Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + address + ", Postnummer" + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber + '}';
     }
 }
