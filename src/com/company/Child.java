@@ -16,10 +16,10 @@ public class Child {
     //Constructors
     Child() {}
 
-    Child(int idChild, String firstNameChild, String lastNamechild, int ageChild, boolean onWaitlist, int idParent){
+    Child(int idChild, String firstNameChild, String lastNameChild, int ageChild, boolean onWaitlist, int idParent){
         this.idChild = idChild;
         this.firstNameChild = firstNameChild;
-        this.lastNameChild = lastNamechild;
+        this.lastNameChild = lastNameChild;
         this.ageChild = ageChild;
         this.onWaitList = onWaitlist;
         this.idParent = idParent;
@@ -57,12 +57,12 @@ public class Child {
 
 
     public Child createChild(boolean childOnWaitList) {
-        int childid = getIdChild();
+        int childId = getIdChild();
         String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
         String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
         int age = userInput.inputInt("Indtast barnets alder: ");
-        int parentid = getIdParent();
-        return new Child(childid, firstName, lastName, age, childOnWaitList, parentid);
+        int parentId = getIdParent();
+        return new Child(childId, firstName, lastName, age, childOnWaitList, parentId);
     }
 
     @Override

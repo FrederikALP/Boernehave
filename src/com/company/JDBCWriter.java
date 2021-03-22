@@ -34,12 +34,10 @@ public class JDBCWriter {
             preparedStatement.setInt(1,id); //Kig i første kolunne og brug parameter til at vælge
             result = preparedStatement.executeUpdate();
 
-
         }catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Fejl i deleteMember");
         }
-
         return result;
     }
 
