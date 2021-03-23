@@ -1,22 +1,26 @@
 package com.company;
 
+import java.sql.SQLException;
+
 public class Main {
 
 
-    void run() {
+    void run() throws SQLException {
         //Instances
         JDBCWriter jdbcWriter = new JDBCWriter();
-        jdbcWriter.setConnection("gustav","0108");
+        jdbcWriter.setConnection("Hanne","Hanne");
         Parent parent = new Parent();
         Child child = new Child();
+        jdbcWriter.addDBToArrayList();
+
 
         //Method Calls
-        System.out.println(child.createChild(true).toString());
-        System.out.println(parent.createParent().toString());
+        //System.out.println(child.createChild(true).toString());
+        //System.out.println(parent.createParent().toString());
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new Main().run();
     }
 }

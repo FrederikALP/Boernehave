@@ -26,9 +26,27 @@ public class JDBCWriter {
         return bres;
     }
 
-    public void addDBToArrayList() {
+    public void addDBToArrayList() throws SQLException {
+        Statement s = connection.createStatement();
+        ResultSet rsChild = s.executeQuery("SELECT * from childs");
 
+        if (rsChild != null)
+            while(rsChild.next()) {
+                arrayList.add(new Child(rsChild.getInt("idchild"), rsChild.getString("firstname"),
+                        rsChild.getString("lastname"), rsChild.getInt("age"),
+                        rsChild.getBoolean("waitlist"), rsChild.getInt("idparent")));
+            }
+        ResultSet rsParent = s.executeQuery("SELECT * from parents");
+        if (rsParent != null)
+            while(rsParent.next()) {
+                arrayList.add(new Parent(rsParent.getInt("idparent"), rsParent.getString("firstname"),
+                        rsParent.getString("lastname"), rsParent.getInt("phonenumber"),
+                        rsParent.getString("streetname"), rsParent.getString("zipcode"), rsParent.getString("city")));
+            }
+        System.out.println(arrayList);
     }
+
+
 
     public void updateArrayListToDB() {
 

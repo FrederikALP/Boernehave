@@ -10,14 +10,14 @@ public class Parent extends Child {
     private String lastName;
     private String streetName;
     private int phoneNumber;
-    private int zipcode;
+    private String zipcode;
     private String city;
 
 
     //Constructors
     Parent() {}
 
-    Parent(int idparent, String firstName, String lastName, int phoneNumber, String streetName, int zipcode, String city) {
+    Parent(int idparent, String firstName, String lastName, int phoneNumber, String streetName, String zipcode, String city) {
         this.idparent = idparent;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,9 +45,9 @@ public class Parent extends Child {
     public void setStreetName(String streetName) {this.streetName = streetName;}
 
 
-    public int getZipcode() {return zipcode;}
+    public String getZipcode() {return zipcode;}
 
-    public void setZipcode(int zipcode) {this.zipcode = zipcode;}
+    public void setZipcode(String zipcode) {this.zipcode = zipcode;}
 
 
     public String getCity() {return city;}
@@ -66,7 +66,7 @@ public class Parent extends Child {
         String firstname = userInput.inputString("Indtast forældres fornavn: ", true);
         String lastname = userInput.inputString("Indtast forældres efternavn: ", true);
         String address = userInput.inputString("Indtast forældres vejnavn + nr.: ", false);
-        int zipcode = userInput.inputInt("Indtast postnummer: ");
+        String zipcode = userInput.inputString("Indtast postnummer: ", false);
         String city = userInput.inputString("Indtast by: ", true);
         int phoneNumber = userInput.inputInt("Indtast forældres telefon nummer: ");
         return new Parent(idparent, firstname, lastname, phoneNumber, address, zipcode, city);
@@ -75,6 +75,7 @@ public class Parent extends Child {
 
     @Override
     public String toString() {
-        return"Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + streetName + ", Postnummer" + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber + '}';
+        return "\n" + "Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + streetName + ", Postnummer"
+                + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber;
     }
 }

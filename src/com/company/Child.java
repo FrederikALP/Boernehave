@@ -67,6 +67,12 @@ public class Child {
 
     @Override
     public String toString() {
-        return "Barnets navn: " + firstNameChild + " " + lastNameChild + ", Alder: " + ageChild;
+        return  "\n" + "Child" +
+                ", idChild=" + idChild +
+                ", firstNameChild='" + firstNameChild + '\'' +
+                ", lastNameChild='" + lastNameChild + '\'' +
+                ", ageChild=" + ageChild +
+                ", onWaitList=" + onWaitList +
+                ", idParent=" + idParent;
     }
 }
