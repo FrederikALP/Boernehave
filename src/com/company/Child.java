@@ -57,12 +57,12 @@ public class Child {
 
 
     public Child createChild(boolean childOnWaitList) {
-        int childid = getIdChild();
+        int childId = getIdChild();
         String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
         String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
         int age = userInput.inputInt("Indtast barnets alder: ");
-        int parentid = getIdParent();
-        return new Child(childid, firstName, lastName, age, childOnWaitList, parentid);
+        int parentId = getIdParent();
+        return new Child(childId, firstName, lastName, age, childOnWaitList, parentId);
     }
 
     @Override

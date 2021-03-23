@@ -4,7 +4,6 @@ public class Parent extends Child {
 
     //Instances
     UserInput userInput = new UserInput();
-
     //Attributes
     private int idparent;
     private String firstName;
@@ -14,22 +13,23 @@ public class Parent extends Child {
     private int zipcode;
     private String city;
 
+
     //Constructors
     Parent() {}
 
-    Parent(String firstName, String lastName, String address, int zipcode, String city, int phoneNumber) {
+    Parent(int idparent, String firstName, String lastName, int phoneNumber, String address, int zipcode, String city) {
+        this.idparent = idparent;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;
-        this.phoneNumber = phoneNumber;
+
 
     }
 
     //Getters & Setters
-
-
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName; }
@@ -69,7 +69,7 @@ public class Parent extends Child {
         int zipcode = userInput.inputInt("Indtast postnummer: ");
         String city = userInput.inputString("Indtast by: ", true);
         int phoneNumber = userInput.inputInt("Indtast forældres telefon nummer: ");
-        return new Parent(firstname, lastname, address, zipcode, city, phoneNumber);
+        return new Parent(idparent, firstname, lastname, phoneNumber, address, zipcode, city);
     }
 
 
