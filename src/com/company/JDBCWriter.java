@@ -57,6 +57,18 @@ public class JDBCWriter {
         Statement s = connection.createStatement();
         s.execute(insStr);
     }
+    public void insertParent(Parent parent) throws SQLException {
+
+        String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
+                parent.getFirstName() + "','" +
+                parent.getLastName() + "','" +
+                parent.getPhoneNumber() + "," +
+                parent.getStreetName() + "','" +
+                parent.getZipcode() + "','" +
+                parent.getCity() + "')";
+        Statement s = connection.createStatement();
+        s.execute(insStr);
+    }
 
 }
 

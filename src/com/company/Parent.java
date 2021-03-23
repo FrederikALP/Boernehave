@@ -59,17 +59,20 @@ public class Parent extends Child {
 
     public void setPhoneNumber(int phoneNumber) {this.phoneNumber = phoneNumber;}
 
+    public int getIdparent() {return idparent;}
 
+    public void setIdparent(int idparent) {this.idparent = idparent;}
 
     //Method for creating Parent Object.
     public Parent createParent() {
+        int idparent = getIdparent();
         String firstname = userInput.inputString("Indtast forældres fornavn: ", true);
         String lastname = userInput.inputString("Indtast forældres efternavn: ", true);
-        String address = userInput.inputString("Indtast forældres vejnavn + nr.: ", false);
+        String streetname = userInput.inputString("Indtast forældres vejnavn + nr.: ", false);
         String zipcode = userInput.inputString("Indtast postnummer: ", false);
         String city = userInput.inputString("Indtast by: ", true);
         int phoneNumber = userInput.inputInt("Indtast forældres telefon nummer: ");
-        return new Parent(idparent, firstname, lastname, phoneNumber, address, zipcode, city);
+        return new Parent(idparent, firstname, lastname, phoneNumber, streetname, zipcode, city);
     }
 
 
