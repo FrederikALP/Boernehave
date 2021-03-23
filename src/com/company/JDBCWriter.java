@@ -96,34 +96,42 @@ public class JDBCWriter {
         return child;
     }
 
-    Child searchForChild() {
+    Object searchForChildOrParent(boolean parentTrueChildFalse) {
         String name = userInput.inputString("Enter name of child: " , true);
-        ArrayList<Child> childsFound = new ArrayList<>();
+        ArrayList<Object> personFound = new ArrayList<>();
+
+        String parentOrChild;
+        if (parentTrueChildFalse)
+            parentOrChild = "ParentID:";
+        else
+            parentOrChild = "idChild=";
+
 
         //Loop through and find matches to "searchFor". Send to arraylist.
         for (int i = 0; i<arrayList.size(); i++) {
-
-            if (arrayList.get(i).toString().contains(name)) {
-                childsFound.add((Child) arrayList.get(i));
+            if (arrayList.get(i).toString().contains(parentOrChild)) {
+                if (arrayList.get(i).toString().contains(name)) {
+                personFound.add(arrayList.get(i));
+                }
             }
         }
 
         //With only one hit
-        if (childsFound.size() ==1){
-            return childsFound.get(0);
-        } else if (childsFound.size()>1){
+        if (personFound.size() ==1){
+            return personFound.get(0);
+        } else if (personFound.size()>1){
             //More than one hit
-            for (int i = 0; i < childsFound.size(); i++) {
+            for (int i = 0; i < personFound.size(); i++) {
                 System.out.println((i + 1) + "."); //Displays index numbers+1
-                System.out.println(childsFound.get(i).getFirstNameChild());
+                System.out.println(personFound.get(i).toString());
             }
-            int reInput = userInput.inputInt(1,childsFound.size(),"Skriv index nummer for den " + " du vil vælge.")-1;
-            return childsFound.get(reInput);
+            int reInput = userInput.inputInt(1,personFound.size(),"Skriv index nummer for den " + " du vil vælge.")-1;
+            return personFound.get(reInput);
         } else {
             //No hits on the search-term.
             System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
-            Child child = searchForChild();
-            return child;
+            Object obj = searchForChildOrParent(parentTrueChildFalse);
+            return obj;
         }
     }
 }
