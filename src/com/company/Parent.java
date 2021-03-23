@@ -8,7 +8,7 @@ public class Parent extends Child {
     private int idparent;
     private String firstName;
     private String lastName;
-    private String address;
+    private String streetName;
     private int phoneNumber;
     private int zipcode;
     private String city;
@@ -17,12 +17,12 @@ public class Parent extends Child {
     //Constructors
     Parent() {}
 
-    Parent(int idparent, String firstName, String lastName, int phoneNumber, String address, int zipcode, String city) {
+    Parent(int idparent, String firstName, String lastName, int phoneNumber, String streetName, int zipcode, String city) {
         this.idparent = idparent;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.streetName = streetName;
         this.zipcode = zipcode;
         this.city = city;
 
@@ -40,9 +40,9 @@ public class Parent extends Child {
     public void setLastName(String lastName) {this.lastName = lastName;}
 
 
-    public String getAddress() {return address;}
+    public String getStreetName() {return streetName;}
 
-    public void setAddress(String address) {this.address = address;}
+    public void setStreetName(String streetName) {this.streetName = streetName;}
 
 
     public int getZipcode() {return zipcode;}
@@ -75,6 +75,6 @@ public class Parent extends Child {
 
     @Override
     public String toString() {
-        return"Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + address + ", Postnummer" + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber + '}';
+        return"Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + streetName + ", Postnummer" + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber + '}';
     }
 }
