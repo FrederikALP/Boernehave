@@ -11,7 +11,7 @@ public class Main {
         jdbcWriter.setConnection("Hanne","Hanne");
         Parent parent = new Parent();
         Child child = new Child();
-        //jdbcWriter.insertChild(child.createChild(false));
+        jdbcWriter.insertChild(child.createChild(false));
         jdbcWriter.insertParent(parent.createParent());
         jdbcWriter.addDBToArrayList();
 

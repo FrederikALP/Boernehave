@@ -50,8 +50,8 @@ public class JDBCWriter {
 
         String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES('" +
                 child.getFirstNameChild() + "','" +
-                child.getLastNameChild() + "'," +
-                child.getAgeChild() + "," +
+                child.getLastNameChild() + "','" +
+                child.getAgeChild() + "'," +
                 child.getOnWaitList() + "," +
                 child.getIdParent() + ")";
         Statement s = connection.createStatement();
@@ -62,7 +62,7 @@ public class JDBCWriter {
         String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
                 parent.getFirstName() + "','" +
                 parent.getLastName() + "','" +
-                parent.getPhoneNumber() + "," +
+                parent.getPhoneNumber() + "','" +
                 parent.getStreetName() + "','" +
                 parent.getZipcode() + "','" +
                 parent.getCity() + "')";
