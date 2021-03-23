@@ -8,7 +8,7 @@ public class JDBCWriter {
 
     public boolean setConnection(String username, String password) {
 
-        final String url = "jdbc:mysql://127.0.0.1:3306/??????????????serverTimezone=UTC";
+        final String url = "jdbc:mysql://127.0.0.1:3306/?gustav";
         boolean bres = false;
 
         try {

@@ -5,6 +5,8 @@ public class Main {
 
     void run() {
         //Instances
+        JDBCWriter jdbcWriter = new JDBCWriter();
+        jdbcWriter.setConnection("gustav","0108");
         Parent parent = new Parent();
         Child child = new Child();
 
@@ -16,8 +18,5 @@ public class Main {
 
     public static void main(String[] args) {
         new Main().run();
-
-
-
     }
 }

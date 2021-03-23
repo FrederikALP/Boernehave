@@ -5,6 +5,7 @@ public class Child {
     //Instances
     UserInput userInput = new UserInput();
 
+
     //Attributes
     private int idChild;
     private String firstNameChild;
@@ -12,6 +13,7 @@ public class Child {
     private int ageChild;
     private boolean onWaitList;
     private int idParent;
+
 
     //Constructors
     Child() {}
