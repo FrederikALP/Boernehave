@@ -78,23 +78,13 @@ public class JDBCWriter {
         String insStr = "UPDATE childs set firstname = '" + child.getFirstNameChild() +
                 "', lastname ='" + child.getLastNameChild() +
                 "', age ='" + child.getAgeChild() +
-                "', waitlist ='" + child.getOnWaitList() +
-                "', idparent ='" + child.getIdParent() +
+                "', waitlist =" + child.getOnWaitList() +
+                ", idparent ='" + child.getIdParent() +
                 "' where idchild = " + child.getIdChild();
         Statement s = connection.createStatement();
         s.execute(insStr);
     }
 
-    public Object searchName() {
-        Child child = new Child();
-        String name = userInput.inputString("Enter name of child: " , true);
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i).toString().contains(name)) {
-                return arrayList.get(i);
-            }
-        }
-        return child;
-    }
 
     Object searchForChildOrParent(boolean parentTrueChildFalse) {
         String name = userInput.inputString("Enter name of child: " , true);
@@ -133,6 +123,41 @@ public class JDBCWriter {
             Object obj = searchForChildOrParent(parentTrueChildFalse);
             return obj;
         }
+    }
+
+    public Child editChild(Object object) {
+        Child child = (Child) object;
+
+        boolean run = true;
+        int menuChoice;
+
+        while (run){
+            menuChoice = (userInput.inputInt(child.toString() + "\n" + "Vælg 1 for at ændre fornavn\nVælg 2 for at ændre efternavn\n" +
+                    "Vælg 3 for at ændre alder\nVælg 4 for at ændre ventelistestatus\nVælg 5 for at ændre forældreID" +
+                    "\nVælg 6 for at gemme ændringerne"));
+            switch (menuChoice){
+                case 1:
+                    child.setFirstNameChild(userInput.inputString("Skriv fornavnet venligst",true));
+                    break;
+                case 2:
+                    child.setLastNameChild(userInput.inputString("Skriv efternavnet venligst",true));
+                    break;
+                case 3:
+                    child.setAgeChild(userInput.inputInt("Skriv barnets alder venligst"));
+                    break;
+                case 4:
+                    child.setOnWaitList(userInput.inputBoolean("Vælg boolean venligst"));
+                    break;
+                case 5:
+                    child.setIdParent(userInput.inputInt("Skriv fornavnet venligst"));
+                    break;
+                case 6: //Luk
+                    run = false;
+                    break;
+                default:
+            }
+        }
+        return child;
     }
 }
 

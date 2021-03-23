@@ -33,7 +33,7 @@ public class Child {
 
     public String getFirstNameChild() {return firstNameChild;}
 
-    public void setFirstNameChild(String newFirstNameChild) {this.lastNameChild = newFirstNameChild;}
+    public void setFirstNameChild(String newFirstNameChild) {this.firstNameChild = newFirstNameChild;}
 
 
     public String getLastNameChild() {return lastNameChild;}
