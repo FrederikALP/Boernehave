@@ -1,5 +1,7 @@
 package com.company;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -7,6 +9,7 @@ public class JDBCWriter {
 
     private static Connection connection = null;
     ArrayList<Object> arrayList = new ArrayList<>();
+    UserInput userInput = new UserInput();
 
 
     public boolean setConnection(String username, String password) {
@@ -80,6 +83,48 @@ public class JDBCWriter {
                 "' where idchild = " + child.getIdChild();
         Statement s = connection.createStatement();
         s.execute(insStr);
+    }
+
+    public Object searchName() {
+        Child child = new Child();
+        String name = userInput.inputString("Enter name of child: " , true);
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).toString().contains(name)) {
+                return arrayList.get(i);
+            }
+        }
+        return child;
+    }
+
+    Child searchForChild() {
+        String name = userInput.inputString("Enter name of child: " , true);
+        ArrayList<Child> childsFound = new ArrayList<>();
+
+        //Loop through and find matches to "searchFor". Send to arraylist.
+        for (int i = 0; i<arrayList.size(); i++) {
+
+            if (arrayList.get(i).toString().contains(name)) {
+                childsFound.add((Child) arrayList.get(i));
+            }
+        }
+
+        //With only one hit
+        if (childsFound.size() ==1){
+            return childsFound.get(0);
+        } else if (childsFound.size()>1){
+            //More than one hit
+            for (int i = 0; i < childsFound.size(); i++) {
+                System.out.println((i + 1) + "."); //Displays index numbers+1
+                System.out.println(childsFound.get(i).getFirstNameChild());
+            }
+            int reInput = userInput.inputInt(1,childsFound.size(),"Skriv index nummer for den " + " du vil vælge.")-1;
+            return childsFound.get(reInput);
+        } else {
+            //No hits on the search-term.
+            System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
+            Child child = searchForChild();
+            return child;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
@@ -11,9 +12,12 @@ public class Main {
         jdbcWriter.setConnection("Hanne","Hanne");
         Parent parent = new Parent();
         Child child = new Child();
-        jdbcWriter.insertChild(child.createChild(false));
-        jdbcWriter.insertParent(parent.createParent());
+
+        //jdbcWriter.insertChild(child.createChild(false));
+        //jdbcWriter.insertParent(parent.createParent());
         jdbcWriter.addDBToArrayList();
+
+        System.out.println(jdbcWriter.searchForChild().toString());
 
 
         //Method Calls
