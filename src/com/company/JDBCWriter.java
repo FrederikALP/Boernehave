@@ -50,12 +50,12 @@ public class JDBCWriter {
 
         String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES('" +
                 child.getFirstNameChild() + "','" +
-                child.getLastNameChild() + "', '" +
+                child.getLastNameChild() + "'," +
                 child.getAgeChild() + "," +
                 child.getOnWaitList() + "," +
                 child.getIdParent() + ")";
         Statement s = connection.createStatement();
-        s.executeUpdate(insStr);
+        s.execute(insStr);
     }
 
 }

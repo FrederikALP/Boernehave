@@ -61,7 +61,7 @@ public class Child {
         String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
         String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
         int age = userInput.inputInt("Indtast barnets alder: ");
-        int parentId = getIdParent();
+        int parentId = userInput.inputInt("Indtast parent id");
         return new Child(childId, firstName, lastName, age, childOnWaitList, parentId);
     }
 
