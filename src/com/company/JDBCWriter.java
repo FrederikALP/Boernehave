@@ -46,10 +46,17 @@ public class JDBCWriter {
         System.out.println(arrayList);
     }
 
+    public void insertChild(Child child) throws SQLException {
 
-
-    public void updateArrayListToDB() {
-
+        String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES('" +
+                child.getFirstNameChild() + "','" +
+                child.getLastNameChild() + "', '" +
+                child.getAgeChild() + "," +
+                child.getOnWaitList() + "," +
+                child.getIdParent() + ")";
+        Statement s = connection.createStatement();
+        s.executeUpdate(insStr);
     }
 
 }
+
