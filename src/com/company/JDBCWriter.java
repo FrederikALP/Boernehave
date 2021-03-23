@@ -70,5 +70,16 @@ public class JDBCWriter {
         s.execute(insStr);
     }
 
+    public void updateChild(Child child) throws SQLException {
+
+        String insStr = "UPDATE childs set firstname = '" + child.getFirstNameChild() +
+                "', lastname ='" + child.getLastNameChild() +
+                "', age ='" + child.getAgeChild() +
+                "', waitlist ='" + child.getOnWaitList() +
+                "', idparent ='" + child.getIdParent() +
+                "' where idchild = " + child.getIdChild();
+        Statement s = connection.createStatement();
+        s.execute(insStr);
+    }
 }
 
