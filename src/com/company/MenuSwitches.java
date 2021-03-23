@@ -48,7 +48,7 @@ public class MenuSwitches {
         //Menu
         boolean run = true;
         int menuChoice;
-        String headertext = "Formands valgmuligheder - "+ TimeAndDate.currentDate();
+        String headertext = "Formands valgmuligheder - ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Tilføj nyt medlem.", "2. Rediger medlem.", "3. Slet medlem.",
                 "4. Vis den årlige indkomst fra kontigenter.",
@@ -88,7 +88,7 @@ public class MenuSwitches {
         //Menu
         boolean run = true;
         int menuChoice;
-        String headertext = "Træner valgmuligheder - "+ TimeAndDate.currentDate();
+        String headertext = "Træner valgmuligheder - ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Indtast ny svømmetid", "2. Vis top5 svømmere indenfor alle discipliner",
                 "3. Vis medlem med tider",
@@ -123,7 +123,7 @@ public class MenuSwitches {
     void cashierMenu() throws Exception {
         boolean run = true;
         int menuChoice;
-        String headertext = "Kasser valgmuligheder - " + TimeAndDate.currentDate();
+        String headertext = "Kasser valgmuligheder - ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Vis omsættelse", "2. Vis medlemmer i restance", "0. Log ud af din bruger"};
         while (run) {
@@ -154,7 +154,7 @@ public class MenuSwitches {
         //Menu
         boolean run = true;
         int menuChoice;
-        String headertext = "admin valgmuligheder - " + TimeAndDate.currentDate();
+        String headertext = "admin valgmuligheder - ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Tilføj nyt medlem", "2. Rediger medlem", "3. Vis omsættelse",
                 "4. Display top5 ", "5. Vis alle medlemmer",
