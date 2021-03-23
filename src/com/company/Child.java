@@ -16,12 +16,12 @@ public class Child {
     //Constructors
     Child() {}
 
-    Child(int idChild, String firstNameChild, String lastNamechild, int ageChild, boolean onWaitlist, int idParent){
+    Child(int idChild, String firstNameChild, String lastNameChild, int ageChild, boolean onWaitList, int idParent){
         this.idChild = idChild;
         this.firstNameChild = firstNameChild;
-        this.lastNameChild = lastNamechild;
+        this.lastNameChild = lastNameChild;
         this.ageChild = ageChild;
-        this.onWaitList = onWaitlist;
+        this.onWaitList = onWaitList;
         this.idParent = idParent;
     }
 

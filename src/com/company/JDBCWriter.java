@@ -8,7 +8,7 @@ public class JDBCWriter {
 
     public boolean setConnection(String username, String password) {
 
-        final String url = "jdbc:mysql://127.0.0.1:3306/??????????????serverTimezone=UTC";
+        final String url = "jdbc:mysql://127.0.0.1:3306/roskildeboernehave?serverTimezone=UTC";
         boolean bres = false;
 
         try {
@@ -44,14 +44,16 @@ public class JDBCWriter {
     }
 
     //vi sender et player objekt til metoden, og den indsætter den.
-    /* mangler at rettes til så det passer med child
-    public int insertPlayer(Child Child){
+    // mangler at rettes til så det passer med child
+    public int insertChild(Child child){
 
-        String insStr = "INSERT INTO childs(first_name,last_name,age,team) VALUES ('" +
-                child.getFirstname() + "','" +
-                child.getLastname() + "'," +
-                child.getAge() + "," +
-                child.getTeam() + ")";
+
+        String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES ('" +
+                child.getFirstNameChild() + "','" +
+                child.getLastNameChild() + "'," +
+                child.getAgeChild() + "," +
+                child.getOnWaitList() + ")"+
+                child.getOnWaitList();
         PreparedStatement preparedStatement;
 
         int result = -1;
@@ -69,7 +71,7 @@ public class JDBCWriter {
         System.out.println("Successfully inserted a player");
         return result;
     }
-   */
+
 
   /*
   public Child getChildFromDbById(int child_id){
