@@ -194,10 +194,10 @@ public class JDBCWriter {
                     "\n0. for at gemme ændringerne"));
             switch (menuChoice){
                 case 1:
-                    child.setFirstNameChild(userInput.inputString("Indtast barnets fornavnet: ",true));
+                    child.setFirstNameChild(userInput.inputString("Indtast barnets fornavn: ",true));
                     break;
                 case 2:
-                    child.setLastNameChild(userInput.inputString("Indtast barnets efternavnet: ",true));
+                    child.setLastNameChild(userInput.inputString("Indtast barnets efternavn: ",true));
                     break;
                 case 3:
                     child.setAgeChild(userInput.inputInt("Indtast barnets alder:"));
@@ -227,14 +227,14 @@ public class JDBCWriter {
 
         while (run){
             menuChoice = (userInput.inputInt(parent.toString() + "\n" + "1. for at ændre fornavn\n2. for at ændre efternavn\n" +
-                    "3. for at ændre alder\n4. for at ændre ventelistestatus\n5. for at ændre forældreID" +
+                    "3. for at ændre alder\n4. for at ændre venteliste-status\n5. for at ændre forældreID" +
                     "\n0. for at gemme ændringerne"));
             switch (menuChoice){
                 case 1:
-                    parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavnet: ",true));
+                    parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavn: ",true));
                     break;
                 case 2:
-                    parent.setLastNameParent(userInput.inputString("Indtast forældres efternavnet: ",true));
+                    parent.setLastNameParent(userInput.inputString("Indtast forældres efternavn: ",true));
                     break;
                 case 3:
                     parent.setPhoneNumber(userInput.inputInt("Indtast forældres tlf nr:"));
