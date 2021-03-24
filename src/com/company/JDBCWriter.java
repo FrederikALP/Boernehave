@@ -89,7 +89,14 @@ public class JDBCWriter {
                 child.getIdParentChild() + ")";
         Statement s = connection.createStatement();
         s.execute(insStr);
+
+        String selectID = "Select idchild from childs where firstname = '" + child.getFirstNameChild() + "' and lastname = '"+ child.getLastNameChild() +"';";
+        ResultSet rs = s.executeQuery(selectID);
+        rs.next();
+        child.setIdChild(rs.getInt("idchild"));
+
         arrayList.add(child);
+        System.out.println(child.toString());
     }
 
     //Et insert SQLString der insereter et Parent object i databasen.
@@ -104,7 +111,14 @@ public class JDBCWriter {
                 parent.getCity() + "')";
         Statement s = connection.createStatement();
         s.execute(insStr);
+
+        String selectID = "Select idparent from parents where firstname = '" + parent.getFirstNameParent() + "' and lastname = '"+ parent.getLastNameParent() +"';";
+        ResultSet rs = s.executeQuery(selectID);
+        rs.next();
+        parent.setIdParent(rs.getInt("idparent"));
+
         arrayList.add(parent);
+        System.out.println(parent.toString());
     }
     //En SQLString der opdaterer databasen baseret på et Child object.
     public void updateChild(Child child) throws SQLException {
@@ -117,6 +131,7 @@ public class JDBCWriter {
                 "' where idchild = " + child.getIdParentChild();
         Statement s = connection.createStatement();
         s.execute(insStr);
+
         arrayList.add(child);
     }
 
@@ -144,20 +159,26 @@ public class JDBCWriter {
     }
 
     //Method that searches/compares through objects in a list and returns 1 object based on match.
-    Object searchForChildOrParent(String message, boolean parentTrueChildFalse) {
+    Object searchForChildOrParent(String message, boolean parentTrueChildFalse, boolean childOnWaitlist) {
         String name = userInput.inputString(message, true);
         ArrayList<Object> personFound = new ArrayList<>();
 
+        String waitlistID = "";
         //Alt efter parameteren vælger man om metoden skal søge efter kun børn eller kun voksne.
         String parentOrChild;
         if (parentTrueChildFalse)
             parentOrChild = PARENT_IDENTIFIER;
-        else
+        else {
             parentOrChild = CHILD_IDENTIFIER;
+            if (childOnWaitlist)
+                waitlistID = WAITLIST_CHILD_IDENTIFIER;
+            else
+                waitlistID = ACTIVE_CHILD_IDENTIFIER;
+        }
 
         //Loop through all objects from the main ArrayList and copies matching objects into the personFound-arraylist.
         for (int i = 0; i<arrayList.size(); i++) {
-            if (arrayList.get(i).toString().contains(parentOrChild)) {
+            if (arrayList.get(i).toString().contains(parentOrChild) && (arrayList.get(i).toString().contains(waitlistID))) {
                 if (arrayList.get(i).toString().contains(name)) {
                     personFound.add(arrayList.get(i));
                 }
@@ -177,7 +198,7 @@ public class JDBCWriter {
         //if '0' matching searchits it runs the method through again
         } else {
             System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
-            return searchForChildOrParent(message, parentTrueChildFalse);
+            return searchForChildOrParent(message, parentTrueChildFalse, childOnWaitlist);
         }
     }
 
@@ -189,9 +210,8 @@ public class JDBCWriter {
         int menuChoice;
 
         while (run){
-            menuChoice = (userInput.inputInt(child.toString() + "\n" + "1. for at ændre fornavn\n2. for at ændre efternavn\n" +
-                    "3. for at ændre alder\n4. for at ændre ventelistestatus\n5. for at ændre forældreID" +
-                    "\n0. for at gemme ændringerne"));
+            menuChoice = (userInput.inputInt(child.toString() + "\n1. Ændre fornavn\n2. Ændre efternavn\n" +
+                    "3. Ændre alder\n4. Ændre ventelistestatus\n5. Ændre forældreID\n0. Gem ændringerne"));
             switch (menuChoice){
                 case 1:
                     child.setFirstNameChild(userInput.inputString("Indtast barnets fornavnet: ",true));
@@ -226,9 +246,9 @@ public class JDBCWriter {
         int menuChoice;
 
         while (run){
-            menuChoice = (userInput.inputInt(parent.toString() + "\n" + "1. for at ændre fornavn\n2. for at ændre efternavn\n" +
-                    "3. for at ændre alder\n4. for at ændre ventelistestatus\n5. for at ændre forældreID" +
-                    "\n0. for at gemme ændringerne"));
+            menuChoice = (userInput.inputInt(parent.toString() + "\n1. Ændre fornavn\n2. Ændre efternavn\n" +
+                    "3. Ændre Tlf nr.\n4. Ændre addresse\n5. Ændre postnr.\n 6. Ændre By" +
+                    "\n0. Gem alle ændringerne"));
             switch (menuChoice){
                 case 1:
                     parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavnet: ",true));

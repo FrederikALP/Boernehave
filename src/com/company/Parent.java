@@ -25,8 +25,6 @@ public class Parent extends Child {
         this.streetName = streetName;
         this.zipcode = zipcode;
         this.city = city;
-
-
     }
 
     //Getters & Setters

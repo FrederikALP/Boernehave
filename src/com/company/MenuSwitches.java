@@ -18,7 +18,7 @@ public class MenuSwitches {
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;
         int menuChoice;
-        String headertext = "Børnehave program ";
+        String headertext = "\nBørnehave program ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Oversigtsmenu", "2. Børnemenu", "3. Forældremenu.", "9. Luk programmet"};
 
@@ -52,7 +52,7 @@ public class MenuSwitches {
         //Menu
         boolean run = true;
         int menuChoice;
-        String headertext = "Oversigtsmenu ";
+        String headertext = "\nOversigtsmenu ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Vis børnehavens børn ", "2. Vis børn på venteliste", "3. Vis forældre", "0. Gå tilbage til hovedmenu"};
         while (run) {
@@ -85,11 +85,11 @@ public class MenuSwitches {
         //Menu
         boolean run = true;
         int menuChoice;
-        String headertext = "Børnemenu ";
+        String headertext = "\nBørnemenu ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Opret barn og forældre", "2. Tilføj barn til venteliste",
-                "3. Rediger barn",
-                "4. Slet barn","0. Gå tilbage til hovedmenu"};
+                "3. Rediger børnehave barn", "4. Rediger venteliste barn",
+                "5. Slet børnehave barn", "6. Slet venteliste barn", "0. Gå tilbage til hovedmenu"};
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
@@ -105,10 +105,20 @@ public class MenuSwitches {
                     jdbcWriter.insertChild(child.createChild(true));
                     break;
                 case 3:
-                    jdbcWriter.updateChild(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false)));
+                    jdbcWriter.printArrayList(true, false, false);
+                    jdbcWriter.updateChild(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, false)));
                     break;
                 case 4:
-                    jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false));
+                    jdbcWriter.printArrayList(false, true, false);
+                    jdbcWriter.updateChild(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, true)));
+                    break;
+                case 5:
+                    jdbcWriter.printArrayList(true, false, false);
+                    jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, false));
+                    break;
+                case 6:
+                    jdbcWriter.printArrayList(false, true, false);
+                    jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, true));
                     break;
                 default:
                     System.out.println("");
@@ -120,7 +130,7 @@ public class MenuSwitches {
     void parentMenu() throws SQLException {
         boolean run = true;
         int menuChoice;
-        String headertext = "Forældremenu ";
+        String headertext = "\nForældremenu ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Opret forældre", "2. Rediger forældre","3. Slet forældre", "0. Gå tilbage til hovedmenu"};
         while (run) {
@@ -135,10 +145,12 @@ public class MenuSwitches {
                     jdbcWriter.insertParent(parent.createParent());
                     break;
                 case 2: //Edit parent
-                    jdbcWriter.updateParent(jdbcWriter.editParent(jdbcWriter.searchForChildOrParent("Søg på den forældre du vil redigere", true)));
+                    jdbcWriter.printArrayList(false, false, true);
+                    jdbcWriter.updateParent(jdbcWriter.editParent(jdbcWriter.searchForChildOrParent("Søg på den forældre du vil redigere", true, false)));
                     break;
                 case 3:
-
+                    jdbcWriter.printArrayList(false, false, true);
+                    //jdbcWriter.removeParent(jdbcWriter.searchForChildOrParent("Skriv navn/id på det barn der skal slettes", true));
                     break;
                 default:
                     System.out.println("");
