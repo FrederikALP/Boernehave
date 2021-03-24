@@ -1,7 +1,5 @@
 package com.company;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -88,7 +86,7 @@ public class JDBCWriter {
                 child.getLastNameChild() + "','" +
                 child.getAgeChild() + "'," +
                 child.getOnWaitList() + "," +
-                child.getIdParent() + ")";
+                child.getIdParentChild() + ")";
         Statement s = connection.createStatement();
         s.execute(insStr);
         arrayList.add(child);
@@ -115,15 +113,15 @@ public class JDBCWriter {
                 "', lastname ='" + child.getLastNameChild() +
                 "', age ='" + child.getAgeChild() +
                 "', waitlist =" + child.getOnWaitList() +
-                ", idparent ='" + child.getIdParent() +
-                "' where idchild = " + child.getIdChild();
+                ", idparent ='" + child.getIdParentChild() +
+                "' where idchild = " + child.getIdParentChild();
         Statement s = connection.createStatement();
         s.execute(insStr);
         arrayList.add(child);
     }
 
     public void updateParent(Parent parent) throws SQLException {
-        System.out.println(parent.toString());
+
         String insStr = "UPDATE parents set firstname = '" + parent.getFirstName() +
                 "', lastname ='" + parent.getLastName() +
                 "', phonenumber ='" + parent.getPhoneNumber() +
@@ -209,7 +207,7 @@ public class JDBCWriter {
                     break;
                 case 5:
                     printArrayList(false,false,true);
-                    child.setIdParent(userInput.inputInt("Skriv et nyt parent ID"));
+                    child.setIdParentChild(userInput.inputInt("Skriv et nyt parent ID"));
                     break;
                 case 0: //Luk
                     run = false;

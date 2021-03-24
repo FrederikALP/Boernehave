@@ -13,7 +13,7 @@ public class MenuSwitches {
 
     //@author ludvig+frederik
     void mainMenu() throws SQLException {
-        jdbcWriter.setConnection("ludvig","789bog");
+        jdbcWriter.setConnection("gustav","0108");
         jdbcWriter.addDBToArrayList();
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;

@@ -11,18 +11,18 @@ public class Child {
     private String lastNameChild;
     private int ageChild;
     private boolean onWaitList;
-    private int idParent;
+    private int idParentChild;
 
     //Constructors
     Child() {}
 
-    Child(int idChild, String firstNameChild, String lastNameChild, int ageChild, boolean onWaitList, int idParent){
+    Child(int idChild, String firstNameChild, String lastNameChild, int ageChild, boolean onWaitList, int idParentChild){
         this.idChild = idChild;
         this.firstNameChild = firstNameChild;
         this.lastNameChild = lastNameChild;
         this.ageChild = ageChild;
         this.onWaitList = onWaitList;
-        this.idParent = idParent;
+        this.idParentChild = idParentChild;
     }
 
     //Getters & Setters
@@ -51,9 +51,9 @@ public class Child {
     public void setOnWaitList(boolean newOnWaitList) { this.onWaitList = newOnWaitList;}
 
 
-    public int getIdParent() {return idParent;}
+    public int getIdParentChild() {return idParentChild;}
 
-    public void setIdParent(int idParent) {this.idParent = idParent;}
+    public void setIdParentChild(int idParentChild) {this.idParentChild = idParentChild;}
 
 
     public Child createChild(boolean childOnWaitList) {
@@ -71,7 +71,7 @@ public class Child {
                 " Navn: " + firstNameChild + " " + lastNameChild +
                 " Alder: " + ageChild +
                 " Venteliste: " + onWaitList +
-                " Forældre ID: " + idParent;
+                " Forældre ID: " + idParentChild;
     }
 
 }
