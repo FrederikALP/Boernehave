@@ -9,7 +9,7 @@ public class Main {
     void run() throws SQLException {
         //Instances
         JDBCWriter jdbcWriter = new JDBCWriter();
-        jdbcWriter.setConnection("gustav","0108");
+        jdbcWriter.setConnection("ludvig","789bog");
         Parent parent = new Parent();
         Child child = new Child();
 
@@ -20,7 +20,10 @@ public class Main {
 
         //System.out.println(jdbcWriter.searchForChildOrParent(true).toString());
 
-        jdbcWriter.updateChild(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent(false)));
+        //jdbcWriter.updateChild(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent(false)));
+        jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent(false));
+        jdbcWriter.printArrayList(true, true, true);
+
 
         //Method Calls
         //System.out.println(child.createChild(true).toString());

@@ -90,6 +90,7 @@ public class JDBCWriter {
                 child.getIdParent() + ")";
         Statement s = connection.createStatement();
         s.execute(insStr);
+        arrayList.add(child);
     }
 
     //Et insert SQLString der insereter et Parent object i databasen.
@@ -104,6 +105,7 @@ public class JDBCWriter {
                 parent.getCity() + "')";
         Statement s = connection.createStatement();
         s.execute(insStr);
+        arrayList.add(parent);
     }
     //En SQLString der opdaterer databasen baseret på et Child object.
     public void updateChild(Child child) throws SQLException {
@@ -116,6 +118,16 @@ public class JDBCWriter {
                 "' where idchild = " + child.getIdChild();
         Statement s = connection.createStatement();
         s.execute(insStr);
+        arrayList.add(child);
+    }
+
+
+    public void deleteChild (Object object) throws SQLException {
+        Child child = (Child) object;
+        String delStr = "DELETE FROM childs where idchild = " + child.getIdChild();
+        Statement s = connection.createStatement();
+        s.execute(delStr);
+        arrayList.remove(object);
     }
 
     //Method that searches/compares through objects in a list and returns 1 object based on match.
@@ -156,8 +168,13 @@ public class JDBCWriter {
         }
     }
 
+
+
+
+
     public Child editChild(Object object) {
         Child child = (Child) object;
+        arrayList.remove(object);
 
         boolean run = true;
         int menuChoice;
