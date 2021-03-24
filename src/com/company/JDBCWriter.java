@@ -122,6 +122,20 @@ public class JDBCWriter {
         arrayList.add(child);
     }
 
+    public void updateParent(Parent parent) throws SQLException {
+        System.out.println(parent.toString());
+        String insStr = "UPDATE parents set firstname = '" + parent.getFirstName() +
+                "', lastname ='" + parent.getLastName() +
+                "', phonenumber ='" + parent.getPhoneNumber() +
+                "', streetname ='" + parent.getStreetName() +
+                "', zipcode ='" + parent.getZipcode() +
+                "', city ='" + parent.getCity() +
+                "' where idparent = " + parent.getIdParent();
+        Statement s = connection.createStatement();
+        s.execute(insStr);
+        arrayList.add(parent);
+    }
+
 
     public void deleteChild (Object object) throws SQLException {
         Child child = (Child) object;
@@ -132,8 +146,8 @@ public class JDBCWriter {
     }
 
     //Method that searches/compares through objects in a list and returns 1 object based on match.
-    Object searchForChildOrParent(boolean parentTrueChildFalse) {
-        String name = userInput.inputString("\n\nSkriv navn på den person du ville søge efter: " , true);
+    Object searchForChildOrParent(String message, boolean parentTrueChildFalse) {
+        String name = userInput.inputString(message, true);
         ArrayList<Object> personFound = new ArrayList<>();
 
         //Alt efter parameteren vælger man om metoden skal søge efter kun børn eller kun voksne.
@@ -165,13 +179,9 @@ public class JDBCWriter {
         //if '0' matching searchits it runs the method through again
         } else {
             System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
-            return searchForChildOrParent(parentTrueChildFalse);
+            return searchForChildOrParent(message, parentTrueChildFalse);
         }
     }
-
-
-
-
 
     public Child editChild(Object object) {
         Child child = (Child) object;
@@ -183,7 +193,7 @@ public class JDBCWriter {
         while (run){
             menuChoice = (userInput.inputInt(child.toString() + "\n" + "1. for at ændre fornavn\n2. for at ændre efternavn\n" +
                     "3. for at ændre alder\n4. for at ændre ventelistestatus\n5. for at ændre forældreID" +
-                    "\n6. for at gemme ændringerne"));
+                    "\n0. for at gemme ændringerne"));
             switch (menuChoice){
                 case 1:
                     child.setFirstNameChild(userInput.inputString("Indtast barnets fornavnet: ",true));
@@ -201,13 +211,53 @@ public class JDBCWriter {
                     printArrayList(false,false,true);
                     child.setIdParent(userInput.inputInt("Skriv et nyt parent ID"));
                     break;
-                case 6: //Luk
+                case 0: //Luk
                     run = false;
                     break;
                 default:
             }
         }
         return child;
+    }
+
+    public Parent editParent(Object object) {
+        Parent parent = (Parent) object;
+        arrayList.remove(object);
+
+        boolean run = true;
+        int menuChoice;
+
+        while (run){
+            menuChoice = (userInput.inputInt(parent.toString() + "\n" + "1. for at ændre fornavn\n2. for at ændre efternavn\n" +
+                    "3. for at ændre alder\n4. for at ændre ventelistestatus\n5. for at ændre forældreID" +
+                    "\n0. for at gemme ændringerne"));
+            switch (menuChoice){
+                case 1:
+                    parent.setFirstName(userInput.inputString("Indtast forældres fornavnet: ",true));
+                    break;
+                case 2:
+                    parent.setLastName(userInput.inputString("Indtast forældres efternavnet: ",true));
+                    break;
+                case 3:
+                    parent.setPhoneNumber(userInput.inputInt("Indtast forældres tlf nr:"));
+                    break;
+                case 4:
+                    parent.setStreetName(userInput.inputString("Indtast forældres vejnavn + nr.: ",false));
+                    break;
+                case 5:
+                    parent.setZipcode(userInput.inputString("Indtast postnummer: ", false));
+                    break;
+                case 6:
+                    parent.setCity(userInput.inputString("Indtast by: ", true));
+                    break;
+                case 0: //Luk
+                    run = false;
+                    break;
+                default:
+            }
+        }
+        System.out.println(parent.toString());
+        return parent;
     }
 }
 
