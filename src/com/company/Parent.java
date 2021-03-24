@@ -6,8 +6,8 @@ public class Parent extends Child {
     UserInput userInput = new UserInput();
     //Attributes
     private int idparent;
-    private String firstName;
-    private String lastName;
+    private String firstNameParent;
+    private String lastNameParent;
     private String streetName;
     private int phoneNumber;
     private String zipcode;
@@ -17,10 +17,10 @@ public class Parent extends Child {
     //Constructors
     Parent() {}
 
-    Parent(int idparent, String firstName, String lastName, int phoneNumber, String streetName, String zipcode, String city) {
+    Parent(int idparent, String firstNameParent, String lastNameParent, int phoneNumber, String streetName, String zipcode, String city) {
         this.idparent = idparent;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstNameParent = firstNameParent;
+        this.lastNameParent = lastNameParent;
         this.phoneNumber = phoneNumber;
         this.streetName = streetName;
         this.zipcode = zipcode;
@@ -35,14 +35,14 @@ public class Parent extends Child {
     public void setIdParent(int idparent) {this.idparent = idparent;}
 
 
-    public String getFirstName() {return firstName;}
+    public String getFirstNameParent() {return firstNameParent;}
 
-    public void setFirstName(String firstName) {this.firstName = firstName; }
+    public void setFirstNameParent(String firstNameParent) {this.firstNameParent = firstNameParent; }
 
 
-    public String getLastName() {return lastName; }
+    public String getLastNameParent() {return lastNameParent; }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setLastNameParent(String lastNameParent) {this.lastNameParent = lastNameParent;}
 
 
     public int getPhoneNumber() {return phoneNumber;}
@@ -82,7 +82,7 @@ public class Parent extends Child {
     @Override
     public String toString() {
         return "\n\nForældre #" + idparent +
-                " Navn: " + firstName + " " + lastName +
+                " Navn: " + firstNameParent + " " + lastNameParent +
                 " Telefon Nr: " + phoneNumber +
                 "\nAddresse: Gade/vejnavn: " + streetName +
                 " Post Nr: " + zipcode +

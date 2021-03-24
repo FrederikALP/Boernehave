@@ -96,8 +96,8 @@ public class JDBCWriter {
     public void insertParent(Parent parent) throws SQLException {
 
         String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
-                parent.getFirstName() + "','" +
-                parent.getLastName() + "','" +
+                parent.getFirstNameParent() + "','" +
+                parent.getLastNameParent() + "','" +
                 parent.getPhoneNumber() + "','" +
                 parent.getStreetName() + "','" +
                 parent.getZipcode() + "','" +
@@ -122,8 +122,8 @@ public class JDBCWriter {
 
     public void updateParent(Parent parent) throws SQLException {
 
-        String insStr = "UPDATE parents set firstname = '" + parent.getFirstName() +
-                "', lastname ='" + parent.getLastName() +
+        String insStr = "UPDATE parents set firstname = '" + parent.getFirstNameParent() +
+                "', lastname ='" + parent.getLastNameParent() +
                 "', phonenumber ='" + parent.getPhoneNumber() +
                 "', streetname ='" + parent.getStreetName() +
                 "', zipcode ='" + parent.getZipcode() +
@@ -231,10 +231,10 @@ public class JDBCWriter {
                     "\n0. for at gemme ændringerne"));
             switch (menuChoice){
                 case 1:
-                    parent.setFirstName(userInput.inputString("Indtast forældres fornavnet: ",true));
+                    parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavnet: ",true));
                     break;
                 case 2:
-                    parent.setLastName(userInput.inputString("Indtast forældres efternavnet: ",true));
+                    parent.setLastNameParent(userInput.inputString("Indtast forældres efternavnet: ",true));
                     break;
                 case 3:
                     parent.setPhoneNumber(userInput.inputInt("Indtast forældres tlf nr:"));
