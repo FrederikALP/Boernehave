@@ -54,7 +54,6 @@ public class JDBCWriter {
 
     //Prints Childs and/or Parent through 2 loops.
     public void printArrayList(boolean printActiveChild, boolean printWaitlistChild, boolean printParent) {
-        Child child = new Child();
         if (printActiveChild) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).toString().contains(CHILD_IDENTIFIER) && arrayList.get(i).toString().contains(ACTIVE_CHILD_IDENTIFIER)) {
@@ -76,18 +75,19 @@ public class JDBCWriter {
                 }
             }
         }
+        System.out.println(" ");
     }
 
-    //Et insert SQLString der insereter et nyt Child object i databasen.
-    public void insertChild(Child child) throws SQLException {
 
+    //Et insert SQLString der insereter et nyt Child object i databasen.
+    public void insertDB(Child child) throws SQLException {
+        Statement s = connection.createStatement();
         String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES('" +
                 child.getFirstNameChild() + "','" +
                 child.getLastNameChild() + "','" +
                 child.getAgeChild() + "'," +
                 child.getOnWaitList() + "," +
                 child.getIdParentChild() + ")";
-        Statement s = connection.createStatement();
         s.execute(insStr);
 
         String selectID = "Select idchild from childs where firstname = '" + child.getFirstNameChild() + "' and lastname = '"+ child.getLastNameChild() +"';";
@@ -99,9 +99,10 @@ public class JDBCWriter {
         System.out.println(child.toString());
     }
 
-    //Et insert SQLString der insereter et Parent object i databasen.
-    public void insertParent(Parent parent) throws SQLException {
 
+    //Et insert SQLString der insereter et Parent object i databasen.
+    public void insertDB(Parent parent) throws SQLException {
+        Statement s = connection.createStatement();
         String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
                 parent.getFirstNameParent() + "','" +
                 parent.getLastNameParent() + "','" +
@@ -109,7 +110,6 @@ public class JDBCWriter {
                 parent.getStreetName() + "','" +
                 parent.getZipcode() + "','" +
                 parent.getCity() + "')";
-        Statement s = connection.createStatement();
         s.execute(insStr);
 
         String selectID = "Select idparent from parents where firstname = '" + parent.getFirstNameParent() + "' and lastname = '"+ parent.getLastNameParent() +"';";
@@ -120,23 +120,25 @@ public class JDBCWriter {
         arrayList.add(parent);
         System.out.println(parent.toString());
     }
-    //En SQLString der opdaterer databasen baseret på et Child object.
-    public void updateChild(Child child) throws SQLException {
 
+
+    //En SQLString der opdaterer databasen baseret på et Child object.
+    public void updateDB(Child child) throws SQLException {
+        Statement s = connection.createStatement();
         String insStr = "UPDATE childs set firstname = '" + child.getFirstNameChild() +
                 "', lastname ='" + child.getLastNameChild() +
                 "', age ='" + child.getAgeChild() +
                 "', waitlist =" + child.getOnWaitList() +
                 ", idparent ='" + child.getIdParentChild() +
                 "' where idchild = " + child.getIdParentChild();
-        Statement s = connection.createStatement();
         s.execute(insStr);
 
         arrayList.add(child);
     }
 
-    public void updateParent(Parent parent) throws SQLException {
 
+    public void updateDB(Parent parent) throws SQLException {
+        Statement s = connection.createStatement();
         String insStr = "UPDATE parents set firstname = '" + parent.getFirstNameParent() +
                 "', lastname ='" + parent.getLastNameParent() +
                 "', phonenumber ='" + parent.getPhoneNumber() +
@@ -144,19 +146,47 @@ public class JDBCWriter {
                 "', zipcode ='" + parent.getZipcode() +
                 "', city ='" + parent.getCity() +
                 "' where idparent = " + parent.getIdParent();
-        Statement s = connection.createStatement();
         s.execute(insStr);
+
         arrayList.add(parent);
     }
 
 
     public void deleteChild (Object object) throws SQLException {
-        Child child = (Child) object;
-        String delStr = "DELETE FROM childs where idchild = " + child.getIdChild();
         Statement s = connection.createStatement();
+        Child child = (Child) object;
+
+        String delStr = "DELETE FROM childs where idchild = " + child.getIdChild();
         s.execute(delStr);
+
         arrayList.remove(object);
     }
+
+
+    public void deleteParent (Object object) throws SQLException {
+        Statement s = connection.createStatement();
+        Parent parent = (Parent) object;
+
+        String delStr1 = "DELETE FROM childs where idparent = " + parent.getIdParent();
+        String delStr2 = "DELETE FROM parents where idparent = " + parent.getIdParent();
+        s.execute(delStr1);
+        s.execute(delStr2);
+
+        arrayList.remove(object);
+        arrayList.remove(returnObjectFromParentID(parent.getIdParent()));
+    }
+
+
+    public Object returnObjectFromParentID(int parentID) {
+        Object object = -1;
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).toString().contains("Forældre ID: "+parentID)) {
+                object = arrayList.get(i);
+            }
+        }
+        return object;
+    }
+
 
     //Method that searches/compares through objects in a list and returns 1 object based on match.
     Object searchForChildOrParent(String message, boolean parentTrueChildFalse, boolean childOnWaitlist) {
@@ -184,23 +214,25 @@ public class JDBCWriter {
                 }
             }
         }
-        //if '1' matching searchhit it Returns arrayindex 0
-        if (personFound.size() ==1){
+
+        if (personFound.size() ==1){ //if '1' matching searchhit it Returns arrayindex 0
+
             return personFound.get(0);
 
-        //if '1+' matching searchhits it returns a user-selected index
-        } else if (personFound.size()>1){
+        } else if (personFound.size()>1){ //if '1+' matching searchhits it returns a user-selected index
             for (int index = 0; index < personFound.size(); index++)
                 System.out.println((index + 1) + ".\n" + personFound.get(index).toString()); //Displays index numbers+1
             int chosenIndex = userInput.inputInt(1,personFound.size(),"Skriv index nummer for den person du vil vælge:")-1;
+
             return personFound.get(chosenIndex);
 
-        //if '0' matching searchits it runs the method through again
-        } else {
+        } else { //if '0' matching searchits it runs the method through again
             System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
+
             return searchForChildOrParent(message, parentTrueChildFalse, childOnWaitlist);
         }
     }
+
 
     public Child editChild(Object object) {
         Child child = (Child) object;
@@ -237,6 +269,7 @@ public class JDBCWriter {
         }
         return child;
     }
+
 
     public Parent editParent(Object object) {
         Parent parent = (Parent) object;
@@ -277,5 +310,7 @@ public class JDBCWriter {
         System.out.println(parent.toString());
         return parent;
     }
+
+
 }
 
