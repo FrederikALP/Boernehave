@@ -15,6 +15,7 @@ public class JDBCWriter {
     final String ACTIVE_CHILD_IDENTIFIER = "Venteliste: false";
     final String WAITLIST_CHILD_IDENTIFIER = "Venteliste: true";
 
+
     public boolean setConnection(String username, String password) {
         final String url = "jdbc:mysql://127.0.0.1:3306/roskildeboernehave?serverTimezone=UTC";
         boolean conStatus = false;
