@@ -9,13 +9,14 @@ public class Main {
     void run() throws SQLException {
         //Instances
         JDBCWriter jdbcWriter = new JDBCWriter();
-        jdbcWriter.setConnection("Hanne","Hanne");
+        jdbcWriter.setConnection("gustav","0108");
         Parent parent = new Parent();
         Child child = new Child();
 
         //jdbcWriter.insertChild(child.createChild(false));
         //jdbcWriter.insertParent(parent.createParent());
         jdbcWriter.addDBToArrayList();
+        jdbcWriter.printArrayList(true, true, true);
 
         //System.out.println(jdbcWriter.searchForChildOrParent(true).toString());
 

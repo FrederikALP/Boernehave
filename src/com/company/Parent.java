@@ -78,7 +78,12 @@ public class Parent extends Child {
 
     @Override
     public String toString() {
-        return "\n" + "ParentID: " + idparent + "Forældres navn: " + firstName + " " + lastName + ", Gade/vejnavn: " + streetName + ", Postnummer"
-                + zipcode + ", By: " + city + ", Telefon nummer:" + phoneNumber;
+        return "\n\nForældre #" + idparent +
+                " Navn: " + firstName + " " + lastName +
+                " Telefon Nr: " + phoneNumber +
+                "\nAddresse: Gade/vejnavn: " + streetName +
+                " Post Nr: " + zipcode +
+                " By: " + city;
     }
+
 }
