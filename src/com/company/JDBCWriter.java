@@ -78,7 +78,6 @@ public class JDBCWriter {
         System.out.println(" ");
     }
 
-
     //Et insert SQLString der insereter et nyt Child object i databasen.
     public void insertDB(Child child) throws SQLException {
         Statement s = connection.createStatement();
@@ -98,7 +97,6 @@ public class JDBCWriter {
         arrayList.add(child);
         System.out.println(child.toString());
     }
-
 
     //Et insert SQLString der insereter et Parent object i databasen.
     public int insertDB(Parent parent) throws SQLException {
@@ -122,7 +120,6 @@ public class JDBCWriter {
         return parent.getIdParent();
     }
 
-
     //En SQLString der opdaterer databasen baseret på et Child object.
     public void updateDB(Child child) throws SQLException {
         Statement s = connection.createStatement();
@@ -136,7 +133,6 @@ public class JDBCWriter {
 
         arrayList.add(child);
     }
-
 
     public void updateDB(Parent parent) throws SQLException {
         Statement s = connection.createStatement();
@@ -152,7 +148,6 @@ public class JDBCWriter {
         arrayList.add(parent);
     }
 
-
     public void deleteChild (Object object) throws SQLException {
         Statement s = connection.createStatement();
         Child child = (Child) object;
@@ -162,7 +157,6 @@ public class JDBCWriter {
 
         arrayList.remove(object);
     }
-
 
     public void deleteParent (Object object) throws SQLException {
         Statement s = connection.createStatement();
@@ -177,7 +171,6 @@ public class JDBCWriter {
         arrayList.remove(returnObjectFromParentID(parent.getIdParent()));
     }
 
-
     public Object returnObjectFromParentID(int parentID) {
         Object object = -1;
         for (int i = 0; i < arrayList.size(); i++) {
@@ -187,7 +180,6 @@ public class JDBCWriter {
         }
         return object;
     }
-
 
     //Method that searches/compares through objects in a list and returns 1 object based on match.
     Object searchForChildOrParent(String message, boolean parentTrueChildFalse, boolean childOnWaitlist) {
@@ -233,7 +225,6 @@ public class JDBCWriter {
             return searchForChildOrParent(message, parentTrueChildFalse, childOnWaitlist);
         }
     }
-
 
     public Child editChild(Object object) {
         Child child = (Child) object;
@@ -311,7 +302,5 @@ public class JDBCWriter {
         System.out.println(parent.toString());
         return parent;
     }
-
-
 }
 

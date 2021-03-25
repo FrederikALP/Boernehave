@@ -1,6 +1,6 @@
 package com.company;
 
-public class Parent extends Child {
+public class Parent {
 
     //Instances
     UserInput userInput = new UserInput();
@@ -12,7 +12,6 @@ public class Parent extends Child {
     private int phoneNumber;
     private String zipcode;
     private String city;
-
 
     //Constructors
     Parent() {}

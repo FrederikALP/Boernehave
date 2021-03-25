@@ -42,7 +42,6 @@ public class MenuSwitches {
     }
 
     void overviewMenu() {
-
         //Menu
         boolean run = true;
         int menuChoice;
@@ -73,7 +72,6 @@ public class MenuSwitches {
     }
 
     void childMenu() throws SQLException {
-
         //Menu
         boolean run = true;
         int menuChoice;
@@ -147,7 +145,6 @@ public class MenuSwitches {
     }
 
     void creatChildMenu() throws SQLException {
-
         //Menu
         boolean run = true;
         int menuChoice;
