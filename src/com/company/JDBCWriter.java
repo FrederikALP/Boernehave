@@ -95,7 +95,7 @@ public class JDBCWriter {
         child.setIdChild(rs.getInt("idchild"));
 
         arrayList.add(child);
-        System.out.println(child.toString());
+        System.out.print(child.toString() + "\n");
     }
 
     //Et insert SQLString der insereter et Parent object i databasen.
@@ -116,7 +116,7 @@ public class JDBCWriter {
         parent.setIdParent(rs.getInt("idparent"));
 
         arrayList.add(parent);
-        System.out.println(parent.toString());
+        System.out.print(parent.toString() + "\n");
         return parent.getIdParent();
     }
 
@@ -259,6 +259,7 @@ public class JDBCWriter {
                 default:
             }
         }
+        System.out.println(child.toString());
         return child;
     }
 

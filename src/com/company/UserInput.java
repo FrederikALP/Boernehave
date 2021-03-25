@@ -43,6 +43,17 @@ public class UserInput {
         return number;
     }
 
+    public int inputInt() {
+        int number;
+        while (!scan.hasNextInt()) {
+            System.out.println("Du skal skrive et hel-tal!");
+            scan.next();
+        }
+        number = scan.nextInt();
+        scan.nextLine();
+        return number;
+    }
+
     //@author Collective
     public String inputString(String msg, Boolean checkForNumbers) {
         String word = "";

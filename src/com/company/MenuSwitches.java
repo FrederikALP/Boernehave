@@ -10,28 +10,31 @@ public class MenuSwitches {
     Parent parent = new Parent();
 
     void mainMenu() throws SQLException {
-        jdbcWriter.setConnection("KristianH","123");
+        jdbcWriter.setConnection("gustav","0108");
         jdbcWriter.addDBToArrayList();
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;
         int menuChoice;
         String headertext = "Børnehave program ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Oversigt over børn og forældre", "2. Børnedata Menu", "3. Forældredata Menu.", "0. Luk programmet"};
+        String[] menuItems = {"1. Oversigt over børn og forældre", "2. Børnehavebørn Menu", "3. Forældredata Menu.", "4. Ventelistebørn Menu", "0. Luk programmet"};
 
         while (run){
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
-            menuChoice = (userInput.inputInt("Choose option: "));
+            menuChoice = (userInput.inputInt());
             switch (menuChoice){
                 case 1:
                     overviewMenu();
                     break;
                 case 2:
-                    childMenu();
+                    createChildMenu();
                     break;
                 case 3:
                     parentMenu();
+                    break;
+                case 4:
+                    createWaitlistChildMenu();
                     break;
                 case 0:
                     run = false;
@@ -47,11 +50,13 @@ public class MenuSwitches {
         int menuChoice;
         String headertext = "Oversigtsmenu ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Vis børnehavens børn ", "2. Vis børn på venteliste", "3. Vis forældre", "0. Gå tilbage til hovedmenu"};
+        String[] menuItems = {"1. Vis børnehavens børn ", "2. Vis børn på venteliste", "3. Vis forældre", "4. Vis alle børn of forældre",
+                "5. Vis alle børn i børnehaven & på venteliste", "6. Søg efter et barn i børnehaven","7. Søg efter et barn fra ventelisten" ,
+                "8. Søg efter en forældre" , "0. Gå tilbage til hovedmenu"};
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
-            menuChoice = userInput.inputInt(leadtext);
+            menuChoice = userInput.inputInt();
             switch (menuChoice) {
                 case 0: // End program
                     run = false;
@@ -65,47 +70,57 @@ public class MenuSwitches {
                 case 3: // Show all parents
                     jdbcWriter.printArrayList(false,false,true);
                     break;
+                case 4:
+                    jdbcWriter.printArrayList(true, true, true);
+                    break;
+                case 5:
+                    jdbcWriter.printArrayList(true, true, false);
+                    break;
+                case 6: //Søg efter et barn i børnehaven
+                    jdbcWriter.searchForChildOrParent("Søg efter et barn i børnehaven",false,false);
+                    break;
+                case 7://Søg efter et barn på ventelisten
+                    jdbcWriter.searchForChildOrParent("Søg efter et barn på ventelisten",false,true);
+                    break;
+                case 8://Søg efter en forældre
+                    jdbcWriter.searchForChildOrParent("Søg efter en forældre", true,false);
+                    break;
                 default:
                     System.out.println("");
             }
         }
     }
 
-    void childMenu() throws SQLException {
+    void createChildMenu() throws SQLException {
         //Menu
         boolean run = true;
         int menuChoice;
         String headertext = "Børnemenu ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Opret nyt barn", "2. Rediger børnehave barn", "3. Rediger venteliste barn",
-                "4. Slet børnehave barn", "5. Slet venteliste barn", "0. Gå tilbage til hovedmenu"};
+        String[] menuItems = {"1. Tilføj barn med nye forældre", "2. Tilføj barn med eksisterende forældre", "3. Rediger barn",
+                "4. Slet børnehave barn", "0. Gå tilbage til hovedmenu"};
 
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
-            menuChoice = userInput.inputInt(leadtext);
+            menuChoice = userInput.inputInt();
             switch (menuChoice) {
                 case 0: //End program
                     run = false;
                     break;
-                case 1: //Opret barn til børnehave
-                    creatChildMenu();
+                case 1: //Tilføj barn med nye forældre
+                    jdbcWriter.insertDB(child.createChild(false, jdbcWriter.insertDB(parent.createParent())));
                     break;
-                case 2: //Rediger barn til børnehave
+                case 2: //Tilføj barn med eksisterende forældre
+                    jdbcWriter.insertDB(child.createChild(false));
+                    break;
+                case 3: //Rediger barn
                     jdbcWriter.printArrayList(true, false, false);
                     jdbcWriter.updateDB(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, false)));
                     break;
-                case 3: //Rediger barn på venteliste
-                    jdbcWriter.printArrayList(false, true, false);
-                    jdbcWriter.updateDB(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, true)));
-                    break;
-                case 4: //Slet barn fra børnehaven
+                case 4: //Slet børnehave barn
                     jdbcWriter.printArrayList(true, false, false);
                     jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, false));
-                    break;
-                case 5: //Slet barn fra venteliste
-                    jdbcWriter.printArrayList(false, true, false);
-                    jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, true));
                     break;
                 default:
                     System.out.println("");
@@ -122,7 +137,7 @@ public class MenuSwitches {
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
-            menuChoice = userInput.inputInt(leadtext);
+            menuChoice = userInput.inputInt();
             switch (menuChoice) {
                 case 0: //End program
                     run = false;
@@ -144,33 +159,35 @@ public class MenuSwitches {
         }
     }
 
-    void creatChildMenu() throws SQLException {
+    void createWaitlistChildMenu() throws SQLException {
         //Menu
         boolean run = true;
         int menuChoice;
         String headertext = "Oversigtsmenu ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Tilføj barn med nye forældre ", "2. Tilføj barn med eksisterende forældre",
-                "3. Tilføj barn på venteliste med nye forældre" ,"4. Tilføj barn til venteliste med eksisterende forældre", "0. Gå tilbage til hovedmenu"};
+        String[] menuItems = {"1. Tilføj barn på venteliste med nye forældre ", "2. Tilføj barn på venteliste med eksisterende forældre",
+                "3. Rediger barn på venteliste" ,"4. Slet bar fra venteliste", "0. Gå tilbage til hovedmenu"};
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
-            menuChoice = userInput.inputInt(leadtext);
+            menuChoice = userInput.inputInt();
             switch (menuChoice) {
                 case 0: // End program
                     run = false;
                     break;
                 case 1: //
-                    jdbcWriter.insertDB(child.createChild(false,jdbcWriter.insertDB(parent.createParent())));
+                    jdbcWriter.insertDB(child.createChild(true, jdbcWriter.insertDB(parent.createParent())));
                     break;
                 case 2: //
-                    jdbcWriter.insertDB(child.createChild(false));
+                    jdbcWriter.insertDB(child.createChild(true));
                     break;
                 case 3: //
-                    jdbcWriter.insertDB(child.createChild(true,jdbcWriter.insertDB(parent.createParent())));
+                    jdbcWriter.printArrayList(false, true, false);
+                    jdbcWriter.updateDB(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, true)));
                     break;
                 case 4: //
-                    jdbcWriter.insertDB(child.createChild(true));
+                    jdbcWriter.printArrayList(false, true, false);
+                    jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, true));
                     break;
                 default:
                     System.out.println("");

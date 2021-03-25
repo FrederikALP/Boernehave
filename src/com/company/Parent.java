@@ -62,7 +62,6 @@ public class Parent {
     public void setCity(String city) {this.city = city;}
 
 
-
     //Method for creating Parent Object.
     public Parent createParent() {
         int idparent = getIdParent();
