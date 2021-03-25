@@ -65,6 +65,14 @@ public class Child {
         return new Child(childId, firstName, lastName, age, childOnWaitList, parentId);
     }
 
+    public Child createChild(boolean childOnWaitList, int parentId) {
+        int childId = getIdChild();
+        String firstName = userInput.inputString("Indtast barnets fornavn: ", true);
+        String lastName = userInput.inputString("Indtast barnets efternavn: ", true);
+        int age = userInput.inputInt("Indtast barnets alder: ");
+        return new Child(childId, firstName, lastName, age, childOnWaitList, parentId);
+    }
+
     @Override
     public String toString() {
         return  "\n\nBarn #" + idChild +

@@ -10,7 +10,7 @@ public class MenuSwitches {
     Parent parent = new Parent();
 
     void mainMenu() throws SQLException {
-        jdbcWriter.setConnection("gustav","0108");
+        jdbcWriter.setConnection("KristianH","123");
         jdbcWriter.addDBToArrayList();
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;
@@ -79,9 +79,8 @@ public class MenuSwitches {
         int menuChoice;
         String headertext = "Børnemenu ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Opret barn og forældre", "2. Tilføj barn til venteliste",
-                "3. Rediger børnehave barn", "4. Rediger venteliste barn",
-                "5. Slet børnehave barn", "6. Slet venteliste barn", "0. Gå tilbage til hovedmenu"};
+        String[] menuItems = {"1. Opret nyt barn", "2. Rediger børnehave barn", "3. Rediger venteliste barn",
+                "4. Slet børnehave barn", "5. Slet venteliste barn", "0. Gå tilbage til hovedmenu"};
 
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
@@ -92,24 +91,21 @@ public class MenuSwitches {
                     run = false;
                     break;
                 case 1: //Opret barn til børnehave
-                    jdbcWriter.insertDB(child.createChild(false));
+                    creatChildMenu();
                     break;
-                case 2: //Opret barn til venteliste
-                    jdbcWriter.insertDB(child.createChild(true));
-                    break;
-                case 3: //Rediger barn til børnehave
+                case 2: //Rediger barn til børnehave
                     jdbcWriter.printArrayList(true, false, false);
                     jdbcWriter.updateDB(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, false)));
                     break;
-                case 4: //Rediger barn på venteliste
+                case 3: //Rediger barn på venteliste
                     jdbcWriter.printArrayList(false, true, false);
                     jdbcWriter.updateDB(jdbcWriter.editChild(jdbcWriter.searchForChildOrParent("Søg på det barn du vil redigere",false, true)));
                     break;
-                case 5: //Slet barn fra børnehaven
+                case 4: //Slet barn fra børnehaven
                     jdbcWriter.printArrayList(true, false, false);
                     jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, false));
                     break;
-                case 6: //Slet barn fra venteliste
+                case 5: //Slet barn fra venteliste
                     jdbcWriter.printArrayList(false, true, false);
                     jdbcWriter.deleteChild(jdbcWriter.searchForChildOrParent( "Skriv navn/id på det barn der skal slettes",false, true));
                     break;
@@ -143,6 +139,41 @@ public class MenuSwitches {
                 case 3: //delete parent
                     jdbcWriter.printArrayList(false, false, true);
                     jdbcWriter.deleteParent(jdbcWriter.searchForChildOrParent("Skriv navn/id på det barn der skal slettes", true, false));
+                    break;
+                default:
+                    System.out.println("");
+            }
+        }
+    }
+
+    void creatChildMenu() throws SQLException {
+
+        //Menu
+        boolean run = true;
+        int menuChoice;
+        String headertext = "Oversigtsmenu ";
+        String leadtext = "Indtast en valgmulighed: ";
+        String[] menuItems = {"1. Tilføj barn med nye forældre ", "2. Tilføj barn med eksisterende forældre",
+                "3. Tilføj barn på venteliste med nye forældre" ,"4. Tilføj barn til venteliste med eksisterende forældre", "0. Gå tilbage til hovedmenu"};
+        while (run) {
+            Menu menu = new Menu(headertext, leadtext, menuItems);
+            menu.printMenu();
+            menuChoice = userInput.inputInt(leadtext);
+            switch (menuChoice) {
+                case 0: // End program
+                    run = false;
+                    break;
+                case 1: //
+                    jdbcWriter.insertDB(child.createChild(false,jdbcWriter.insertDB(parent.createParent())));
+                    break;
+                case 2: //
+                    jdbcWriter.insertDB(child.createChild(false));
+                    break;
+                case 3: //
+                    jdbcWriter.insertDB(child.createChild(true,jdbcWriter.insertDB(parent.createParent())));
+                    break;
+                case 4: //
+                    jdbcWriter.insertDB(child.createChild(true));
                     break;
                 default:
                     System.out.println("");

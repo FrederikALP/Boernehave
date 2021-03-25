@@ -101,7 +101,7 @@ public class JDBCWriter {
 
 
     //Et insert SQLString der insereter et Parent object i databasen.
-    public void insertDB(Parent parent) throws SQLException {
+    public int insertDB(Parent parent) throws SQLException {
         Statement s = connection.createStatement();
         String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
                 parent.getFirstNameParent() + "','" +
@@ -119,6 +119,7 @@ public class JDBCWriter {
 
         arrayList.add(parent);
         System.out.println(parent.toString());
+        return parent.getIdParent();
     }
 
 
@@ -246,10 +247,10 @@ public class JDBCWriter {
                     "3. Ændre alder\n4. Ændre ventelistestatus\n5. Ændre forældreID\n0. Gem ændringerne"));
             switch (menuChoice){
                 case 1:
-                    child.setFirstNameChild(userInput.inputString("Indtast barnets fornavnet: ",true));
+                    child.setFirstNameChild(userInput.inputString("Indtast barnets fornavn: ",true));
                     break;
                 case 2:
-                    child.setLastNameChild(userInput.inputString("Indtast barnets efternavnet: ",true));
+                    child.setLastNameChild(userInput.inputString("Indtast barnets efternavn: ",true));
                     break;
                 case 3:
                     child.setAgeChild(userInput.inputInt("Indtast barnets alder:"));
@@ -284,10 +285,10 @@ public class JDBCWriter {
                     "\n0. Gem alle ændringerne"));
             switch (menuChoice){
                 case 1:
-                    parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavnet: ",true));
+                    parent.setFirstNameParent(userInput.inputString("Indtast forældres fornavn: ",true));
                     break;
                 case 2:
-                    parent.setLastNameParent(userInput.inputString("Indtast forældres efternavnet: ",true));
+                    parent.setLastNameParent(userInput.inputString("Indtast forældres efternavn: ",true));
                     break;
                 case 3:
                     parent.setPhoneNumber(userInput.inputInt("Indtast forældres tlf nr:"));
