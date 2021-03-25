@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class UserInput {
     static Scanner scan = new Scanner(System.in);
 
-    //author Gustav (last project)
     //Checks if the input is an integer and if it is within the chosen min/max value
     public int inputInt(int min, int max, String msg) {
         int number;
@@ -28,7 +27,6 @@ public class UserInput {
         return number;
     }
 
-    //@author (last project)
     //Asks user to input an integer if they didn't
     public int inputInt(String msgOutput) {
         int number;
@@ -54,7 +52,6 @@ public class UserInput {
         return number;
     }
 
-    //@author Collective
     public String inputString(String msg, Boolean checkForNumbers) {
         String word = "";
         if (!checkForNumbers) {
@@ -72,7 +69,6 @@ public class UserInput {
         return word;
     }
 
-    //@author Mick
     //Scans the given String for numbers and returns TRUE if found.
     public boolean containsNumbers(String str){
         for(char ch : str.toCharArray()){
@@ -83,7 +79,6 @@ public class UserInput {
         return false;
     }
 
-    //@author Unsure
     public boolean inputBoolean(String msg) {
 
         boolean word;

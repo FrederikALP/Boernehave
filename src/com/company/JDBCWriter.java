@@ -13,7 +13,7 @@ public class JDBCWriter {
     final String ACTIVE_CHILD_IDENTIFIER = "Venteliste: false";
     final String WAITLIST_CHILD_IDENTIFIER = "Venteliste: true";
 
-
+    // database connection method
     public boolean setConnection(String username, String password) {
         final String url = "jdbc:mysql://127.0.0.1:3306/roskildeboernehave?serverTimezone=UTC";
         boolean conStatus = false;
@@ -78,7 +78,7 @@ public class JDBCWriter {
         System.out.println(" ");
     }
 
-    //Et insert SQLString der insereter et nyt Child object i databasen.
+    //Et insert SQLString der inserter et nyt Child object i databasen.
     public void insertDB(Child child) throws SQLException {
         Statement s = connection.createStatement();
         String insStr = "INSERT INTO childs(firstname, lastname, age, waitlist, idparent) VALUES('" +
@@ -98,7 +98,7 @@ public class JDBCWriter {
         System.out.print(child.toString() + "\n");
     }
 
-    //Et insert SQLString der insereter et Parent object i databasen.
+    //Et insert SQLString der inserter et Parent object i databasen.
     public int insertDB(Parent parent) throws SQLException {
         Statement s = connection.createStatement();
         String insStr = "INSERT INTO parents(firstname, lastname, phonenumber, streetname, zipcode, city) VALUES('" +
@@ -133,7 +133,7 @@ public class JDBCWriter {
 
         arrayList.add(child);
     }
-
+    //En SQLString der opdaterer databasen baseret på et Parent object.
     public void updateDB(Parent parent) throws SQLException {
         Statement s = connection.createStatement();
         String insStr = "UPDATE parents set firstname = '" + parent.getFirstNameParent() +
@@ -147,7 +147,7 @@ public class JDBCWriter {
 
         arrayList.add(parent);
     }
-
+    //En SQLString der sletter et child fra databasen baseret på Child object.
     public void deleteChild (Object object) throws SQLException {
         Statement s = connection.createStatement();
         Child child = (Child) object;
@@ -157,7 +157,7 @@ public class JDBCWriter {
 
         arrayList.remove(object);
     }
-
+    //En SQLString der sletter et child fra databasen baseret på Parent object.
     public void deleteParent (Object object) throws SQLException {
         Statement s = connection.createStatement();
         Parent parent = (Parent) object;
@@ -170,7 +170,7 @@ public class JDBCWriter {
         arrayList.remove(object);
         arrayList.remove(returnObjectFromParentID(parent.getIdParent()));
     }
-
+    //??
     public Object returnObjectFromParentID(int parentID) {
         Object object = -1;
         for (int i = 0; i < arrayList.size(); i++) {
@@ -199,7 +199,7 @@ public class JDBCWriter {
                 waitlistID = ACTIVE_CHILD_IDENTIFIER;
         }
 
-        //Loop through all objects from the main ArrayList and copies matching objects into the personFound-arraylist.
+        //Looper igennem alle objekter fra main Arraylist og kopierer matchende objekter ind i en personFound-arraylist.
         for (int i = 0; i<arrayList.size(); i++) {
             if (arrayList.get(i).toString().contains(parentOrChild) && (arrayList.get(i).toString().contains(waitlistID))) {
                 if (arrayList.get(i).toString().contains(name)) {
@@ -225,7 +225,7 @@ public class JDBCWriter {
             return searchForChildOrParent(message, parentTrueChildFalse, childOnWaitlist);
         }
     }
-
+    //Metode til at redigere i et child object
     public Child editChild(Object object) {
         Child child = (Child) object;
         arrayList.remove(object);
@@ -263,7 +263,7 @@ public class JDBCWriter {
         return child;
     }
 
-
+    //Metode til at redigere i et parent object
     public Parent editParent(Object object) {
         Parent parent = (Parent) object;
         arrayList.remove(object);
