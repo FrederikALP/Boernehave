@@ -75,7 +75,7 @@ public class Child {
 
     @Override
     public String toString() {
-        return  "\n\nBarn #" + idChild +
+        return  "\nBarn #" + idChild +
                 " Navn: " + firstNameChild + " " + lastNameChild +
                 " Alder: " + ageChild +
                 " Venteliste: " + onWaitList +

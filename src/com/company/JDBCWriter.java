@@ -57,21 +57,21 @@ public class JDBCWriter {
         if (printActiveChild) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).toString().contains(CHILD_IDENTIFIER) && arrayList.get(i).toString().contains(ACTIVE_CHILD_IDENTIFIER)) {
-                    System.out.print(arrayList.get(i));
+                    System.out.println(arrayList.get(i));
                 }
             }
         }
         if (printWaitlistChild) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).toString().contains(CHILD_IDENTIFIER) && arrayList.get(i).toString().contains(WAITLIST_CHILD_IDENTIFIER)) {
-                    System.out.print(arrayList.get(i));
+                    System.out.println(arrayList.get(i));
                 }
             }
         }
         if (printParent) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).toString().contains(PARENT_IDENTIFIER)) {
-                    System.out.print(arrayList.get(i));
+                    System.out.println(arrayList.get(i));
                 }
             }
         }
@@ -234,7 +234,7 @@ public class JDBCWriter {
 
         } else if (personFound.size()>1){ //if '1+' matching searchhits it returns a user-selected index
             for (int index = 0; index < personFound.size(); index++)
-                System.out.println((index + 1) + ".\n" + personFound.get(index).toString()); //Displays index numbers+1
+                System.out.println((index + 1) + "." + personFound.get(index).toString()+"\n"); //Displays index numbers+1
             int chosenIndex = userInput.inputInt(1,personFound.size(),"Skriv index nummer for den person du vil vælge:")-1;
 
             return personFound.get(chosenIndex);

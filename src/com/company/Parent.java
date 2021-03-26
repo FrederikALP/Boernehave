@@ -76,7 +76,7 @@ public class Parent {
 
     @Override
     public String toString() {
-        return "\n\nForældre #" + idparent +
+        return "\nForældre #" + idparent +
                 " Navn: " + firstNameParent + " " + lastNameParent +
                 " Telefon Nr: " + phoneNumber +
                 "\nAddresse: Gade/vejnavn: " + streetName +

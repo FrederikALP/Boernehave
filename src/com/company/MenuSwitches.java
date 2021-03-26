@@ -10,7 +10,7 @@ public class MenuSwitches {
     Parent parent = new Parent();
 
     void mainMenu() throws SQLException {
-        jdbcWriter.setConnection("Hanne","Hanne");
+        jdbcWriter.setConnection("gustav","0108");
         jdbcWriter.addDBToArrayList();
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;
