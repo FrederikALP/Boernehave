@@ -171,7 +171,7 @@ public class JDBCWriter {
         s.execute(delStr2);
 
         arrayList.remove(object);
-        arrayList.remove(returnParentFromParentID(parent.getIdParent()));
+        arrayList.remove(returnChildFromParentID(parent.getIdParent()));
     }
 
     public void printChildAndRelParent(Object object) {
