@@ -10,7 +10,7 @@ public class MenuSwitches {
     Parent parent = new Parent();
 
     void mainMenu() throws SQLException {
-        jdbcWriter.setConnection("KristianH","123");
+        jdbcWriter.setConnection("Hanne","Hanne");
         jdbcWriter.addDBToArrayList();
         jdbcWriter.printArrayList(true,true,true);
         boolean run = true;
@@ -74,11 +74,11 @@ public class MenuSwitches {
                     break;
                 case 5: //Search for a child
                     jdbcWriter.printArrayList(true, true, false);
-                    jdbcWriter.searchForChildOrParent("Søg efter et barn i børnehaven: ",false,3);
+                    System.out.println(jdbcWriter.searchForChildOrParent("Søg efter et barn i børnehaven: ",false,3));
                     break;
                 case 6://Search for parent
                     jdbcWriter.printArrayList(true, false, true);
-                    jdbcWriter.searchForChildOrParent("Søg efter en forældre:", true,0);
+                    System.out.println(jdbcWriter.searchForChildOrParent("Søg efter en forældre:", true,0));
                     break;
                 case 7://Search for related parents
                     jdbcWriter.printArrayList(true, true, false);
