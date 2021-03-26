@@ -17,7 +17,7 @@ public class MenuSwitches {
         int menuChoice;
         String headertext = "Børnehave program ";
         String leadtext = "Indtast en valgmulighed: ";
-        String[] menuItems = {"1. Oversigt over børn og forældre", "2. Børnehavebørn Menu", "3. Forældredata Menu.", "4. Ventelistebørn Menu", "0. Luk programmet"};
+        String[] menuItems = {"1. Oversigt over børn og forældre", "2. Børnehavebørn Menu", "3. Forældre Menu.", "4. Ventelistebørn Menu", "0. Luk programmet"};
 
         while (run){
             Menu menu = new Menu(headertext, leadtext, menuItems);
