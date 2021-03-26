@@ -168,10 +168,15 @@ public class JDBCWriter {
         s.execute(delStr2);
 
         arrayList.remove(object);
-        arrayList.remove(returnObjectFromParentID(parent.getIdParent()));
+        arrayList.remove(returnParentFromParentID(parent.getIdParent()));
     }
-    //??
-    public Object returnObjectFromParentID(int parentID) {
+    public void printChildAndRelParent(Object object) {
+        Child child = (Child) object;
+        System.out.println(child.toString());
+        System.out.println(returnChildFromParentID(child.getIdParentChild()).toString());
+    }
+    //Tager et parentID relateret til en Parent og retunerer Child objectet.
+    public Object returnParentFromParentID(int parentID) {
         Object object = -1;
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).toString().contains("Forældre ID: "+parentID)) {
@@ -181,8 +186,18 @@ public class JDBCWriter {
         return object;
     }
 
+    public Object returnChildFromParentID(int parentID) {
+        Object object = -1;
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).toString().contains(PARENT_IDENTIFIER+parentID)) {
+                object = arrayList.get(i);
+            }
+        }
+        return object;
+    }
+
     //Method that searches/compares through objects in a list and returns 1 object based on match.
-    Object searchForChildOrParent(String message, boolean parentTrueChildFalse, boolean childOnWaitlist) {
+    Object searchForChildOrParent(String message, boolean parentTrueChildFalse, int oneWaitlistTwoActiveThreeAll) {
         String name = userInput.inputString(message, true);
         ArrayList<Object> personFound = new ArrayList<>();
 
@@ -193,9 +208,9 @@ public class JDBCWriter {
             parentOrChild = PARENT_IDENTIFIER;
         else {
             parentOrChild = CHILD_IDENTIFIER;
-            if (childOnWaitlist)
+            if (oneWaitlistTwoActiveThreeAll == 1)
                 waitlistID = WAITLIST_CHILD_IDENTIFIER;
-            else
+            else if (oneWaitlistTwoActiveThreeAll == 2)
                 waitlistID = ACTIVE_CHILD_IDENTIFIER;
         }
 
@@ -222,7 +237,7 @@ public class JDBCWriter {
         } else { //if '0' matching searchits it runs the method through again
             System.out.println("Der kunne ikke findes nogen med søgningen: " + name + ". Prøv igen!" );
 
-            return searchForChildOrParent(message, parentTrueChildFalse, childOnWaitlist);
+            return searchForChildOrParent(message, parentTrueChildFalse, oneWaitlistTwoActiveThreeAll);
         }
     }
     //Metode til at redigere i et child object
