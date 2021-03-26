@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class UserInput {
     static Scanner scan = new Scanner(System.in);

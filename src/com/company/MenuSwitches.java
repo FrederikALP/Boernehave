@@ -51,8 +51,7 @@ public class MenuSwitches {
         String headertext = "Oversigtsmenu ";
         String leadtext = "Indtast en valgmulighed: ";
         String[] menuItems = {"1. Vis børnehavens børn ", "2. Vis børn på venteliste", "3. Vis forældre", "4. Vis alle børn og forældre",
-                "5. Vis alle børn i børnehaven & på venteliste", "6. Søg efter et barn i børnehaven","7. Søg efter et barn fra ventelisten" ,
-                "8. Søg efter en forældre", "9. Søg efter et børnehavebarn og de relaterede forældre", "0. Gå tilbage til hovedmenu"};
+                 "5. Søg efter et barn i børnehaven", "6. Søg efter en forældre", "7. Søg efter et børnehavebarn og de relaterede forældre", "0. Gå tilbage til hovedmenu"};
         while (run) {
             Menu menu = new Menu(headertext, leadtext, menuItems);
             menu.printMenu();
@@ -73,19 +72,16 @@ public class MenuSwitches {
                 case 4: //List all children and parents
                     jdbcWriter.printArrayList(true, true, true);
                     break;
-                case 5: //List all children on and off waitlist
+                case 5: //Search for a child
                     jdbcWriter.printArrayList(true, true, false);
+                    jdbcWriter.searchForChildOrParent("Søg efter et barn i børnehaven: ",false,3);
                     break;
-                case 6: //Search for a child
-                    jdbcWriter.searchForChildOrParent("Søg efter et barn i børnehaven: ",false,2);
-                    break;
-                case 7://Search for child on waitlist
-                    jdbcWriter.searchForChildOrParent("Søg efter et barn på ventelisten: ",false,1);
-                    break;
-                case 8://Search for parent
+                case 6://Search for parent
+                    jdbcWriter.printArrayList(true, false, true);
                     jdbcWriter.searchForChildOrParent("Søg efter en forældre:", true,0);
                     break;
-                case 9://Search for related parents
+                case 7://Search for related parents
+                    jdbcWriter.printArrayList(true, true, false);
                     jdbcWriter.printChildAndRelParent(jdbcWriter.searchForChildOrParent("Søg på et barn og vis forældre: ", false,3));
                     break;
                 default:

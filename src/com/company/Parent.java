@@ -74,7 +74,6 @@ public class Parent {
         return new Parent(idparent, firstName, lastName, phoneNumber, streetName, zipcode, city);
     }
 
-
     @Override
     public String toString() {
         return "\n\nForældre #" + idparent +
