@@ -133,6 +133,7 @@ public class JDBCWriter {
 
         arrayList.add(child);
     }
+
     //En SQLString der opdaterer databasen baseret på et Parent object.
     public void updateDB(Parent parent) throws SQLException {
         Statement s = connection.createStatement();
@@ -147,6 +148,7 @@ public class JDBCWriter {
 
         arrayList.add(parent);
     }
+
     //En SQLString der sletter et child fra databasen baseret på Child object.
     public void deleteChild (Object object) throws SQLException {
         Statement s = connection.createStatement();
@@ -157,6 +159,7 @@ public class JDBCWriter {
 
         arrayList.remove(object);
     }
+
     //En SQLString der sletter et child fra databasen baseret på Parent object.
     public void deleteParent (Object object) throws SQLException {
         Statement s = connection.createStatement();
@@ -170,11 +173,13 @@ public class JDBCWriter {
         arrayList.remove(object);
         arrayList.remove(returnParentFromParentID(parent.getIdParent()));
     }
+
     public void printChildAndRelParent(Object object) {
         Child child = (Child) object;
         System.out.println(child.toString());
         System.out.println(returnChildFromParentID(child.getIdParentChild()).toString());
     }
+
     //Tager et parentID relateret til en Parent og retunerer Child objectet.
     public Object returnParentFromParentID(int parentID) {
         Object object = -1;
@@ -240,6 +245,7 @@ public class JDBCWriter {
             return searchForChildOrParent(message, parentTrueChildFalse, oneWaitlistTwoActiveThreeAll);
         }
     }
+
     //Metode til at redigere i et child object
     public Child editChild(Object object) {
         Child child = (Child) object;
